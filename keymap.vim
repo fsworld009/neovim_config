@@ -19,6 +19,14 @@ nnoremap ]c :cnext<CR>
 nnoremap [c :cprevious<CR>
 nnoremap ]C :copen<CR>
 
+" abbreviated motion keys for tags stack moving
+nnoremap ]= <C-]>
+nnoremap [= <C-t>
+
+" abbreviated motion keys for jumplist
+nnoremap ]j <C-i>
+nnoremap [j <C-o>
+
 "close buffers/kill buffers
 nnoremap [d :bd 
 nnoremap [D :bd<CR>
@@ -26,6 +34,10 @@ nnoremap [C :close<CR>
 
 "remove highlight
 nnoremap [h :noh<CR>
+
+"edit .vimrc
+nnoremap <leader>ve :e $MYVIMRC<CR>
+nnoremap <leader>vs :source $MYVIMRC<CR>
 
 nnoremap <leader>S :set spell!<CR>
   

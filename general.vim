@@ -29,3 +29,9 @@ set foldmethod=indent   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1 
+
+
+"temp files location
+ execute "set backupdir=" .  g:vimrc_path . "vimfiles\\backup\\"
+ execute "set directory=" .  g:vimrc_path . "vimfiles\\swap\\"
+ execute "set undodir=" .  g:vimrc_path . "vimfiles\\undo\\"
