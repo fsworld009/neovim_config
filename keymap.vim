@@ -64,5 +64,8 @@ nnoremap <leader>um :Unite -buffer-name=mark -quick-match bookmark<cr>
 nnoremap <leader>u<leader> :Unite -buffer-name=mapping -start-insert mapping<cr>
 nnoremap <leader>uu :Unite -buffer-name=Unite source<CR>
 
+"Editor commands
+nnoremap <leader>ef :NERDTreeToggle<CR>
+nnoremap <leader>en :NumbersToggle<CR>
+nnoremap <leader>et :TagbarToggle<CR>
 
-nnoremap <leader>nt :NERDTreeToggle<CR>

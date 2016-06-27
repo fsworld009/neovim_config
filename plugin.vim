@@ -39,6 +39,8 @@ call dein#add('Shougo/neoyank.vim')
 
 call dein#add('scrooloose/nerdtree')
 "call dein#add('Xuyuanp/nerdtree-git-plugin')
+call dein#add('majutsushi/tagbar')
+call dein#add('b3niup/numbers.vim')
 
 call dein#add('xolox/vim-misc')
 function! s:vim_session_setup()
@@ -47,7 +49,20 @@ function! s:vim_session_setup()
   let g:session_autosave_periodic = 10
 endfunction
 
+call dein#add('scrooloose/nerdcommenter')
+
+
 call dein#add('xolox/vim-session', {'hook_add': function('s:vim_session_setup')})
+
+call dein#add('ternjs/tern_for_vim', {
+			\ 'build': 'npm install',
+			\ 'if': 'executable("npm")',
+			\ 'on_ft': 'javascript'
+\ })
+
+
+
+
 call dein#end()
 
 
