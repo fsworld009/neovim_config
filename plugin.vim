@@ -39,8 +39,10 @@ call dein#add('Shougo/neoyank.vim')
 
 call dein#add('scrooloose/nerdtree')
 "call dein#add('Xuyuanp/nerdtree-git-plugin')
+call dein#add('airblade/vim-rooter')
 call dein#add('majutsushi/tagbar')
 call dein#add('b3niup/numbers.vim')
+call dein#add('zhaocai/GoldenView.Vim')
 
 call dein#add('scrooloose/nerdcommenter')
 call dein#add('tpope/vim-surround')
