@@ -40,6 +40,14 @@ call dein#add('Shougo/neoyank.vim')
 call dein#add('scrooloose/nerdtree')
 "call dein#add('Xuyuanp/nerdtree-git-plugin')
 
+call dein#add('xolox/vim-misc')
+function! s:vim_session_setup()
+  let g:session_autosave = 'yes'
+  let g:session_autoload = 'yes'
+  let g:session_autosave_periodic = 10
+endfunction
+
+call dein#add('xolox/vim-session', {'hook_add': function('s:vim_session_setup')})
 call dein#end()
 
 
