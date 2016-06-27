@@ -48,6 +48,9 @@ call dein#add('tpope/vim-surround')
 call dein#add('xolox/vim-misc')
 
 function! s:vim_session_setup()
+  if has('win32')
+    let g:session_directory = $LOCALAPPDATA . '\nvim-data\sessions'
+  endif
   let g:session_autosave = 'yes'
   let g:session_autoload = 'yes'
   let g:session_autosave_periodic = 10
@@ -66,7 +69,8 @@ function! s:vim_airline_setup()
   let g:airline#extensions#tabline#enabled = 1
   set laststatus=2
 endfunction
-call dein#add('bling/vim-airline', {'hook_add': function('s:vim_airline_setup')})
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes',{'hook_add': function('s:vim_airline_setup')})
 
 call dein#add('mbbill/undotree')
 call dein#add('Lokaltog/vim-easymotion')
