@@ -9,9 +9,20 @@ execute "set runtimepath^=" . s:dein_base_path
 
 call dein#begin(s:plugin_base_path)
 
-call dein#add(s:dein_base_path)
-"call dein#add('fsworld009/obsidian2.vim')
+call dein#add('Shougo/dein.vim')
+
+call dein#add('fsworld009/obsidian2.vim')
+
+"function! SetColorScheme()
+"  echo 'inside'
+"  colorscheme obsidian2
+"endfunction
+"call dein#set_hook('obsidian2.vim','post_add',function('SetColorScheme'))
 
 call dein#end()
 
+
 filetype plugin indent on
+
+"call dein#install()
+"autocmd VimEnter * call dein#call_hook('post_source')

@@ -15,7 +15,7 @@ endif
 
 
 
-let s:script_files = ["general.vim","plugin.vim","keymap.vim"]
+let s:script_files = ["plugin.vim","general.vim","keymap.vim"]
 for script_file in s:script_files
   execute "source " . g:vimrc_path . script_file
 endfor
