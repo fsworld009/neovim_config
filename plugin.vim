@@ -17,6 +17,9 @@ endif
 
 call dein#add('fsworld009/obsidian2.vim',{'hook_add':'silent! colorscheme obsidian2'})
 
+" call dein#add('tpope/vim-fugitive')
+" call dein#add('gregsexton/gitv')
+
 call dein#add('Yggdroot/indentLine')
 
 call dein#add('Shougo/vimproc.vim')
@@ -87,15 +90,15 @@ filetype plugin indent on
 "autocmd VimEnter * call dein#call_hook('post_source')
 
 
-let g:NERDTreeIndicatorMapCustom = {
-  \ "Modified"  : "✹",
-  \ "Staged"    : "✚",
-  \ "Untracked" : "✭",
-  \ "Renamed"   : "➜",
-  \ "Unmerged"  : "═",
-  \ "Deleted"   : "✖",
-  \ "Dirty"     : "✗",
-  \ "Clean"     : "✔︎",
-  \ "Unknown"   : "?"
-  \ }
+" let g:NERDTreeIndicatorMapCustom = {
+"   \ "Modified"  : "✹",
+"   \ "Staged"    : "✚",
+"   \ "Untracked" : "✭",
+"   \ "Renamed"   : "➜",
+"   \ "Unmerged"  : "═",
+"   \ "Deleted"   : "✖",
+"   \ "Dirty"     : "✗",
+"   \ "Clean"     : "✔︎",
+"   \ "Unknown"   : "?"
+"   \ }
 "let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{','}']]

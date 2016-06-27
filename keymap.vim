@@ -68,6 +68,7 @@ nnoremap <leader>uu :Unite -buffer-name=Unite source<CR>
 nnoremap <leader>ef :NERDTreeToggle<CR>
 nnoremap <leader>en :NumbersToggle<CR>
 nnoremap <leader>et :TagbarToggle<CR>
+nnoremap <leader>eg :GoldenViewResize<CR>
 
 "Undo Tree
 nnoremap ,t :UndotreeToggle<CR>
@@ -91,3 +92,13 @@ nnoremap ,t :UndotreeToggle<CR>
 "Copy between register " (default register) and * (Windows clipboard)
   nnoremap <leader>>> :let @*=@"<CR>
   nnoremap <leader><< :let @"=@*<CR>
+  
+"Fugitive
+"  nnoremap <leader>gs :Gstatus<CR>
+"  nnoremap <leader>gd :Gdiff<CR>
+"  nnoremap <leader>gc :Gcommit<CR>
+"  nnoremap <leader>gl :Gitv<CR>
+"  nnoremap <leader>gg :Git 
+"  nnoremap <leader>g! :Git! 
+"  nnoremap <leader>g> :diffget 2<CR>
+"  nnoremap <leader>g< :diffget 3<CR>
