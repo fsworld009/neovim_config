@@ -75,7 +75,7 @@ call dein#add('vim-airline/vim-airline-themes',{'hook_add': function('s:vim_airl
 call dein#add('mbbill/undotree')
 call dein#add('Lokaltog/vim-easymotion')
 
-
+"call dein#add('junegunn/rainbow_parentheses.vim')
 
 call dein#end()
 
@@ -96,3 +96,4 @@ let g:NERDTreeIndicatorMapCustom = {
   \ "Clean"     : "✔︎",
   \ "Unknown"   : "?"
   \ }
+"let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{','}']]

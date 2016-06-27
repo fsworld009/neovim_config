@@ -87,3 +87,7 @@ nnoremap ,t :UndotreeToggle<CR>
   nmap <leader>sW ysiW
   nmap <leader>ss yss
   vmap <leader>s S
+  
+"Copy between register " (default register) and * (Windows clipboard)
+  nnoremap <leader>>> :let @*=@"<CR>
+  nnoremap <leader><< :let @"=@*<CR>
