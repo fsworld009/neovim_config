@@ -3,14 +3,14 @@ let g:vimrc_path = substitute(g:vimrc_path, "init.vim", "", "")
 
 let g:dir_separator = ""
 if has('win32')
-  let g:dir_separator = "\\"
+  let g:dir_separator = '\\'
 elseif has('mac')
   if exists('*MacSetFont')
     call MacSetFont("Monaco", 14)
   endif
-  let g:dir_separator = "/"
+  let g:dir_separator = '/'
 elseif has('unix')
-  let g:dir_separator = "/"
+  let g:dir_separator = '/'
 endif
 
 
