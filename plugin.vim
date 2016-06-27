@@ -19,6 +19,19 @@ call dein#add('fsworld009/obsidian2.vim')
 "endfunction
 "call dein#set_hook('obsidian2.vim','post_add',function('SetColorScheme'))
 
+call dein#add('Shougo/vimproc.vim', {
+    \ 'build': {
+    \     'windows': 'tools\\update-dll-mingw',
+    \     'cygwin': 'make -f make_cygwin.mak',
+    \     'mac': 'make -f make_mac.mak',
+    \     'linux': 'make',
+    \     'unix': 'gmake',
+    \    },
+    \ })
+
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/neoyank.vim')
+
 call dein#end()
 
 
