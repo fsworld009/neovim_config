@@ -12,10 +12,12 @@ call dein#begin(s:plugin_base_path)
 call dein#add('Shougo/dein.vim')
 
 if has('win32')
-call dein#add('equalsraf/neovim-gui-shim')
+  call dein#add('equalsraf/neovim-gui-shim')
 endif
 
 call dein#add('fsworld009/obsidian2.vim',{'hook_add':'silent! colorscheme obsidian2'})
+
+call dein#add('Yggdroot/indentLine')
 
 call dein#add('Shougo/vimproc.vim')
 "call dein#add('Shougo/vimproc.vim', {
