@@ -5,6 +5,7 @@ let g:dir_separator = ""
 if has('win32')
   let g:dir_separator = "\\"
 elseif has('mac')
+  call MacSetFont("Monaco", 14)
   let g:dir_separator = "/"
 elseif has('unix')
   let g:dir_separator = "/"
