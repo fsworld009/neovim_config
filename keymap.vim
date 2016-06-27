@@ -69,3 +69,21 @@ nnoremap <leader>ef :NERDTreeToggle<CR>
 nnoremap <leader>en :NumbersToggle<CR>
 nnoremap <leader>et :TagbarToggle<CR>
 
+"Undo Tree
+nnoremap ,t :UndotreeToggle<CR>
+
+"EasyMotion key bindings
+  nmap <Plug>(easymotion-prefix)s <Plug>(easymotion-s2)
+  nmap <Plug>(easymotion-prefix)<Down> <Plug>(easymotion-j)
+  nmap <Plug>(easymotion-prefix)<Up> <Plug>(easymotion-k)
+  nmap <Plug>(easymotion-prefix)/   <Plug>(easymotion-sn)
+  nmap <Plug>(easymotion-prefix). <Plug>(easymotion-repeat)
+  
+"Surround plugin command remaps (all commands begin with <leader>s, it just makes more sense to me)
+  "cs ysiw ds yss (V)S
+  nmap <leader>sc cs
+  nmap <leader>sd ds
+  nmap <leader>sw ysiw
+  nmap <leader>sW ysiW
+  nmap <leader>ss yss
+  vmap <leader>s S

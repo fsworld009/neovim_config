@@ -42,16 +42,16 @@ call dein#add('scrooloose/nerdtree')
 call dein#add('majutsushi/tagbar')
 call dein#add('b3niup/numbers.vim')
 
+call dein#add('scrooloose/nerdcommenter')
+call dein#add('tpope/vim-surround')
+
 call dein#add('xolox/vim-misc')
+
 function! s:vim_session_setup()
   let g:session_autosave = 'yes'
   let g:session_autoload = 'yes'
   let g:session_autosave_periodic = 10
 endfunction
-
-call dein#add('scrooloose/nerdcommenter')
-
-
 call dein#add('xolox/vim-session', {'hook_add': function('s:vim_session_setup')})
 
 call dein#add('ternjs/tern_for_vim', {
@@ -60,11 +60,20 @@ call dein#add('ternjs/tern_for_vim', {
 			\ 'on_ft': 'javascript'
 \ })
 
+function! s:vim_airline_setup()
+  let g:airline_theme = 'powerlineish'
+  let g:airline#extensions#branch#enabled=1
+  let g:airline#extensions#tabline#enabled = 1
+  set laststatus=2
+endfunction
+call dein#add('bling/vim-airline', {'hook_add': function('s:vim_airline_setup')})
+
+call dein#add('mbbill/undotree')
+call dein#add('Lokaltog/vim-easymotion')
 
 
 
 call dein#end()
-
 
 filetype plugin indent on
 
