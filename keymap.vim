@@ -48,6 +48,10 @@ nnoremap <leader>S :set spell!<CR>
 "Find and Replace (substitute)
 nnoremap <leader>fr :%s///gcI
 
+"dein.vim install and refresh
+nnoremap <leader>di :call dein#install()<CR>
+nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
+
 "Unite
 nnoremap <leader>uf :Unite -buffer-name=files -start-insert file_rec/async<cr>
 nnoremap <leader>ug :Unite -buffer-name=grep -start-insert grep:.<cr>
