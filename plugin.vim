@@ -11,13 +11,7 @@ call dein#begin(s:plugin_base_path)
 
 call dein#add('Shougo/dein.vim')
 
-call dein#add('fsworld009/obsidian2.vim')
-
-"function! SetColorScheme()
-"  echo 'inside'
-"  colorscheme obsidian2
-"endfunction
-"call dein#set_hook('obsidian2.vim','post_add',function('SetColorScheme'))
+call dein#add('fsworld009/obsidian2.vim',{'hook_add':'colorscheme obsidian2'})
 
 call dein#add('Shougo/vimproc.vim', {
     \ 'build': {
@@ -32,6 +26,13 @@ call dein#add('Shougo/vimproc.vim', {
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/neoyank.vim')
 
+
+"call dein#add('scrooloose/nerdtree',
+"      \{'on_cmd': 'NERDTreeToggle'})
+
+call dein#add('scrooloose/nerdtree')
+"call dein#add('Xuyuanp/nerdtree-git-plugin')
+
 call dein#end()
 
 
@@ -39,3 +40,16 @@ filetype plugin indent on
 
 "call dein#install()
 "autocmd VimEnter * call dein#call_hook('post_source')
+
+
+let g:NERDTreeIndicatorMapCustom = {
+  \ "Modified"  : "✹",
+  \ "Staged"    : "✚",
+  \ "Untracked" : "✭",
+  \ "Renamed"   : "➜",
+  \ "Unmerged"  : "═",
+  \ "Deleted"   : "✖",
+  \ "Dirty"     : "✗",
+  \ "Clean"     : "✔︎",
+  \ "Unknown"   : "?"
+  \ }

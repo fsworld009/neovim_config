@@ -29,9 +29,6 @@ set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1
 
-
-silent! colorscheme obsidian2
-
 "temp files location
  "execute "set backupdir=" .  g:vimrc_path . "vimfiles" . g:dir_separator . "backup" . g:dir_separator
  "execute "set directory=" .  g:vimrc_path . "vimfiles" . g:dir_separator . "swap"   . g:dir_separator

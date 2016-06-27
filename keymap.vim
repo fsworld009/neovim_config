@@ -59,3 +59,6 @@ nnoremap <leader>ur :Unite -buffer-name=register -quick-match register<cr>
 nnoremap <leader>um :Unite -buffer-name=mark -quick-match bookmark<cr>
 nnoremap <leader>u<leader> :Unite -buffer-name=mapping -start-insert mapping<cr>
 nnoremap <leader>uu :Unite -buffer-name=Unite source<CR>
+
+
+nnoremap <leader>nt :NERDTreeToggle<CR>
