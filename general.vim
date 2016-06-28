@@ -1,3 +1,4 @@
+"fallback when colorscheme is not available
 highlight Normal guibg=black guifg=white
 
 "force English
@@ -30,6 +31,8 @@ set nofoldenable        "dont fold by default
 set foldlevel=1
 
 "temp files location
- "execute "set backupdir=" .  g:vimrc_path . "vimfiles" . g:dir_separator . "backup" . g:dir_separator
- "execute "set directory=" .  g:vimrc_path . "vimfiles" . g:dir_separator . "swap"   . g:dir_separator
- "execute "set undodir="   .  g:vimrc_path . "vimfiles" . g:dir_separator . "undo"   . g:dir_separator
+"execute "set backupdir=" .  g:vimrc_path . "vimfiles" . g:dir_separator . "backup" . g:dir_separator
+"execute "set directory=" .  g:vimrc_path . "vimfiles" . g:dir_separator . "swap"   . g:dir_separator
+"execute "set undodir="   .  g:vimrc_path . "vimfiles" . g:dir_separator . "undo"   . g:dir_separator
+
+autocmd FileType vim setlocal shiftwidth=2 tabstop=2

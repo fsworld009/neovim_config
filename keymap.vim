@@ -51,6 +51,7 @@ nnoremap <leader>fr :%s///gcI
 "dein.vim install and refresh
 nnoremap <leader>di :call dein#install()<CR>
 nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
+nnoremap <leader>dc :call dein#check_lazy_plugins()<CR>
 
 "Unite
 nnoremap <leader>uf :Unite -buffer-name=files -start-insert file_rec/async<cr>
