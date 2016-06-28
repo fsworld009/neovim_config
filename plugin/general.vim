@@ -2,12 +2,15 @@ if has('win32')
   call dein#add('equalsraf/neovim-gui-shim')
 endif
 
-call dein#add('fsworld009/obsidian2.vim',{'hook_add':'silent! colorscheme obsidian2'})
+"call dein#add('fsworld009/obsidian2.vim',{'hook_add':'silent! colorscheme obsidian2'})
+call dein#add('freeo/vim-kalisi',{'hook_add':"set background=dark\nsilent! colorscheme kalisi"})
 
- call dein#add('tpope/vim-fugitive')
- call dein#add('gregsexton/gitv')
+call dein#add('tpope/vim-fugitive')
+call dein#add('gregsexton/gitv')
 
 call dein#add('Yggdroot/indentLine')
+
+
 
 call dein#add('Shougo/vimproc.vim')
 "call dein#add('Shougo/vimproc.vim', {
@@ -51,14 +54,10 @@ function! s:vim_session_setup()
 endfunction
 call dein#add('xolox/vim-session', {'hook_add': function('s:vim_session_setup')})
 
-call dein#add('ternjs/tern_for_vim', {
-			\ 'build': 'npm install',
-			\ 'if': 'executable("npm")',
-			\ 'on_ft': 'javascript'
-\ })
 
 function! s:vim_airline_setup()
-  let g:airline_theme = 'powerlineish'
+  "let g:airline_theme = 'powerlineish'
+  let g:airline_theme='kalisi'
   let g:airline#extensions#branch#enabled=1
   let g:airline#extensions#tabline#enabled = 1
   set laststatus=2

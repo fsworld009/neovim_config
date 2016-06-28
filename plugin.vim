@@ -15,6 +15,8 @@ let s:script_files = [
   \ 'markdown.vim',
   \ 'html.vim',
   \ 'css.vim',
+  \ 'javascript.vim',
+  \ 'json.vim'
   \]
   
 for script_file in s:script_files
