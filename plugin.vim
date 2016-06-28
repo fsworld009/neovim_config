@@ -17,8 +17,8 @@ endif
 
 call dein#add('fsworld009/obsidian2.vim',{'hook_add':'silent! colorscheme obsidian2'})
 
-" call dein#add('tpope/vim-fugitive')
-" call dein#add('gregsexton/gitv')
+ call dein#add('tpope/vim-fugitive')
+ call dein#add('gregsexton/gitv')
 
 call dein#add('Yggdroot/indentLine')
 
@@ -45,7 +45,7 @@ call dein#add('scrooloose/nerdtree')
 call dein#add('airblade/vim-rooter')
 call dein#add('majutsushi/tagbar')
 call dein#add('b3niup/numbers.vim')
-call dein#add('zhaocai/GoldenView.Vim')
+"call dein#add('zhaocai/GoldenView.Vim')
 
 call dein#add('scrooloose/nerdcommenter')
 call dein#add('tpope/vim-surround')
@@ -55,6 +55,8 @@ call dein#add('xolox/vim-misc')
 function! s:vim_session_setup()
   if has('win32')
     let g:session_directory = $LOCALAPPDATA . '\nvim-data\sessions'
+  elseif has('mac')
+    let g:session_directory = '~/.local/share/nvim/sessions/'
   endif
   let g:session_autosave = 'yes'
   let g:session_autoload = 'yes'

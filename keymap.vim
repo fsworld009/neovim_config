@@ -94,11 +94,11 @@ nnoremap ,t :UndotreeToggle<CR>
   nnoremap <leader><< :let @"=@*<CR>
   
 "Fugitive
-"  nnoremap <leader>gs :Gstatus<CR>
-"  nnoremap <leader>gd :Gdiff<CR>
-"  nnoremap <leader>gc :Gcommit<CR>
-"  nnoremap <leader>gl :Gitv<CR>
-"  nnoremap <leader>gg :Git 
-"  nnoremap <leader>g! :Git! 
-"  nnoremap <leader>g> :diffget 2<CR>
-"  nnoremap <leader>g< :diffget 3<CR>
+  nnoremap <leader>gs :Gstatus<CR>
+  nnoremap <leader>gd :Gdiff<CR>
+  nnoremap <leader>gc :Gcommit<CR>
+  nnoremap <leader>gl :Gitv<CR>
+  nnoremap <leader>gg :Git 
+  nnoremap <leader>g! :Git! 
+  nnoremap <leader>g> :diffget 2<CR>
+  nnoremap <leader>g< :diffget 3<CR>
