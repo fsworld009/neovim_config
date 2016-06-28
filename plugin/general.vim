@@ -70,7 +70,39 @@ call dein#add('Lokaltog/vim-easymotion')
 
 "call dein#add('junegunn/rainbow_parentheses.vim')
 
+function! s:neomake_setup()
+  autocmd! BufWritePost,BufEnter *.js Neomake
+  let g:neomake_open_list = 0
 
+  "let g:neomake_logfile='C:\error.log'
+  let g:neomake_warning_sign = {
+    \ 'text': 'W',
+    \ 'texthl': 'WarningMsg',
+    \ }
+
+  let g:neomake_error_sign = {
+    \ 'text': 'E',
+    \ 'texthl': 'ErrorMsg',
+    \ }
+endfunction
+
+call dein#add('neomake/neomake',{'hook_add':function('s:neomake_setup')})
+
+"https://github.com/neomake/neomake/issues/296
+augroup neomake
+  au! BufEnter * call EnterNeomake()
+  au! BufWritePost * call SaveNeomake()
+augroup END
+function! EnterNeomake()
+  " don't show the location-list when entering a buffer
+  let g:neomake_open_list=0
+  exe "Neomake"
+endfunction
+function! SaveNeomake()
+  " show the loc-list after saving
+  let g:neomake_open_list=2
+  exe "Neomake"
+endfunction
 
 " let g:NERDTreeIndicatorMapCustom = {
 "   \ "Modified"  : "?",
