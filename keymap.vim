@@ -33,6 +33,7 @@ nnoremap [L :lclose<CR>
 " abbreviated motion keys for tags stack moving
 nnoremap ]= <C-]>
 nnoremap [= <C-t>
+vnoremap ]= <C-]>
 
 " abbreviated motion keys for jumplist
 nnoremap ]j <C-i>

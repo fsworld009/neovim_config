@@ -116,6 +116,8 @@ endfunction
 
 call dein#add('Shougo/deoplete.nvim',{'hook_add':function('s:deoplete_setup')})
 
+call dein#add('ludovicchabant/vim-gutentags')
+
 " let g:NERDTreeIndicatorMapCustom = {
 "   \ "Modified"  : "?",
 "   \ "Staged"    : "?",
