@@ -16,6 +16,7 @@ let s:script_files = [
   \ 'html.vim',
   \ 'css.vim',
   \ 'javascript.vim',
+  \ 'jsx.vim',
   \ 'json.vim'
   \]
   

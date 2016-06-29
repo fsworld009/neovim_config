@@ -15,6 +15,12 @@ if has('win32')
   let g:neomake_javascript_eslint_exe =  'eslint.cmd'
 endif
 
+
+  "let g:neomake_javascript_eslint_exe =  'C:\neovim-qt\node_modules\.bin\eslint.cmd'
+  "let g:neomake_javascript_eslint_maker = {
+  "  \ 'args': ['--no-color', '--format', 'compact'],
+  "  \ 'errorformat': '%f: line %l\, col %c\, %m'
+  "  \ }
 "call dein#add('benjie/neomake-local-eslint.vim')
 
 "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -23,3 +29,4 @@ endif
 call dein#add('carlitux/deoplete-ternjs')
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_show_signature_in_pum = 1
+"autocmd FileType javascript setlocal omnifunc=tern#Complete
