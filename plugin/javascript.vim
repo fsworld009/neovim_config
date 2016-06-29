@@ -10,9 +10,12 @@ call dein#add('othree/javascript-libraries-syntax.vim', {
   \'hook_add': "let g:used_javascript_libs = 'lodash,jquery,react'"
   \})
 
-  
-  
-    let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint']
+if has('win32')
+  let g:neomake_javascript_eslint_exe =  'eslint.cmd'
+endif
+
+
   "let g:neomake_javascript_eslint_exe =  'C:\neovim-qt\node_modules\.bin\eslint.cmd'
   "let g:neomake_javascript_eslint_maker = {
   "  \ 'args': ['--no-color', '--format', 'compact'],
