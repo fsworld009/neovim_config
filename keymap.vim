@@ -18,10 +18,17 @@ nnoremap [T :tabclose<CR>
 nnoremap ]b :bn<CR>
 nnoremap [b :bp<CR>
 nnoremap ]B :buffers<CR>
+nnoremap [B :bd<CR>
 " abbreviated motion keys for quickfix moving
 nnoremap ]c :cnext<CR>
 nnoremap [c :cprevious<CR>
 nnoremap ]C :copen<CR>
+nnoremap [C :cclose<CR>
+" abbreviated motion keys for location list moving
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprevious<CR>
+nnoremap ]L :lopen<CR>
+nnoremap [L :lclose<CR>
 
 " abbreviated motion keys for tags stack moving
 nnoremap ]= <C-]>
@@ -32,9 +39,7 @@ nnoremap ]j <C-i>
 nnoremap [j <C-o>
 
 "close buffers/kill buffers
-nnoremap [d :bd
-nnoremap [D :bd<CR>
-nnoremap [C :close<CR>
+nnoremap [q :close<CR>
 
 "remove highlight
 nnoremap [h :noh<CR>

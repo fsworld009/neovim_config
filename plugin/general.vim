@@ -71,7 +71,7 @@ call dein#add('Lokaltog/vim-easymotion')
 "call dein#add('junegunn/rainbow_parentheses.vim')
 
 function! s:neomake_setup()
-  autocmd! BufWritePost,BufEnter *.js Neomake
+  autocmd! BufWritePost,BufEnter * Neomake
   let g:neomake_open_list = 0
 
   "let g:neomake_logfile='C:\error.log'
