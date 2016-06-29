@@ -108,3 +108,6 @@ nnoremap ,t :UndotreeToggle<CR>
   nnoremap <leader>g! :Git! 
   nnoremap <leader>g> :diffget 2<CR>
   nnoremap <leader>g< :diffget 3<CR>
+  
+"Autocomplete by Tab
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
