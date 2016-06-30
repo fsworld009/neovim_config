@@ -60,16 +60,24 @@ nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
 nnoremap <leader>dc :call dein#check_lazy_plugins()<CR>
 
 "Unite
+nnoremap <leader>uu :Unite -buffer-name=Unite source -start-insert<CR>
 nnoremap <leader>uf :Unite -buffer-name=files -start-insert file_rec/async<cr>
 nnoremap <leader>ug :Unite -buffer-name=grep -start-insert grep:.<cr>
 nnoremap <leader>uc :Unite -buffer-name=command -start-insert command<cr>
-nnoremap <leader>uy :Unite -buffer-name=yank history/yank<cr>
+nnoremap <leader>uy :Unite -buffer-name=yank\ history -quick-match history/yank<cr>
 nnoremap <leader>ub :Unite -buffer-name=buffer -quick-match buffer<cr>
 nnoremap <leader>ut :Unite -buffer-name=tab -quick-match tab<cr>
 nnoremap <leader>ur :Unite -buffer-name=register -quick-match register<cr>
-nnoremap <leader>um :Unite -buffer-name=mark -quick-match bookmark<cr>
 nnoremap <leader>u<leader> :Unite -buffer-name=mapping -start-insert mapping<cr>
-nnoremap <leader>uu :Unite -buffer-name=Unite source<CR>
+nnoremap <leader>u= :Unite -buffer-name=tags -start-insert tag<cr>
+nnoremap <leader>um :Unite -buffer-name=mark -quick-match mark<cr>
+nnoremap <leader>ul :Unite -buffer-name=location -start-insert locationlist<cr>
+nnoremap <leader>uq :Unite -buffer-name=quickfix -start-insert qf<cr>
+nnoremap <leader>u/ :Unite -buffer-name=search\ history -quick-match history/search<cr>
+nnoremap <leader>u: :Unite -buffer-name=command\ history -quick-match history/command<cr>
+nnoremap <leader>uj :Unite -buffer-name=jumplist -quick-match jump<cr>
+nnoremap <leader>uo :Unite -buffer-name=outline -start-insert outline<cr>
+"nnoremap <leader>u- :Unite -buffer-name=bookmark -quick-match bookmark<cr>
 
 "Editor commands
 nnoremap <leader>ef :NERDTreeToggle<CR>

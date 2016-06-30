@@ -26,6 +26,11 @@ call dein#add('Shougo/vimproc.vim')
 
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/neoyank.vim')
+call dein#add('tsukkee/unite-tag')
+call dein#add('tacroe/unite-mark')
+call dein#add('thinca/vim-unite-history')
+call dein#add('sgur/unite-qf')
+call dein#add('Shougo/unite-outline')
 
 
 "call dein#add('scrooloose/nerdtree',
