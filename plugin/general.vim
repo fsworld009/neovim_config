@@ -10,7 +10,7 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('gregsexton/gitv')
 
 call dein#add('Yggdroot/indentLine')
-
+call dein#add('kshenoy/vim-signature')
 
 
 call dein#add('Shougo/vimproc.vim')
