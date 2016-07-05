@@ -32,3 +32,50 @@ let g:tern_show_signature_in_pum = 1
 "autocmd FileType javascript setlocal omnifunc=tern#Complete
 
 let g:gutentags_ctags_executable_javascript = 'jsctags'
+
+
+
+
+"unite-outlint rule test
+function! s:unite_source_outline_setup()
+  let g:test = 1
+  let g:unite_source_outline_info = get(g:, 'unite_source_outline_info', {})
+  let g:unite_source_outline_info.javascript = {}
+    "\'heading' : 'heading'
+    "\}
+  function! g:unite_source_outline_info.javascript.create_heading(which, heading_line, matched_line, context)
+  let g:output = {
+  \ 'which':a:which,
+  \ 'heading_line':a:heading_line,
+  \ 'matched_line':a:matched_line,
+  \ 'context':a:context
+  \}
+    return {
+        \ 'word' : "heading2",
+        \ 'level': 1,
+        \ 'type' : 'generic',
+        \ }
+  endfunction
+    
+  function! g:unite_source_outline_info.javascript.extract_headings(context)
+    return [{
+        \ 'word' : "heading",
+        \ 'level': 1,
+        \ 'type' : 'function',
+        \ 'lnum': 1
+        \ },
+        \{
+        \ 'word' : "heading_v",
+        \ 'level': 2,
+        \ 'type' : 'variable',
+        \ 'lnum': 2
+        \ },
+        \]
+  endfunction
+endfunction
+
+
+
+
+"call dein#config('unite-outline',{'hook_add':function('s:unite_source_outline_setup')})
+

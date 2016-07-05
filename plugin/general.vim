@@ -91,9 +91,11 @@ function! s:neomake_setup()
     \ 'text': 'E',
     \ 'texthl': 'ErrorMsg',
     \ }
+  "let g:neomake_vim_enabled_makers = ['vimlint']
 endfunction
 
 call dein#add('neomake/neomake',{'hook_add':function('s:neomake_setup')})
+call dein#add('syngan/vim-vimlint')
 
 "https://github.com/neomake/neomake/issues/296
 augroup neomake
