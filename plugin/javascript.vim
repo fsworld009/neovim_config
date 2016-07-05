@@ -58,6 +58,9 @@ function! s:unite_source_outline_setup()
   endfunction
     
   function! g:unite_source_outline_info.javascript.extract_headings(context)
+  let l:path = a:context.buffer.path
+  let l:jsctags_output = system('jsctags ' . l:path . ' -f')
+  let l:jsctags_output = split(l:jsctags_output,'\n')
     return [{
         \ 'word' : "heading",
         \ 'level': 1,
