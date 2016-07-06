@@ -60,10 +60,12 @@ function! s:unite_source_outline_setup()
   function! g:unite_source_outline_info.javascript.extract_headings(context)
     let l:path = a:context.buffer.path
     let l:jsctags_output = system('jsctags ' . l:path . ' -f')
-    "remove trailing \n
+
     let l:jsctags_output = substitute(l:jsctags_output,'\n$','','')
     let l:jsctags_output_list = split(l:jsctags_output,'\n')
     let headings=[]
+    
+    let namespace_to_heading_map={}
     for line in l:jsctags_output_list
       let parse_index=0
       let heading_object = {
@@ -71,17 +73,27 @@ function! s:unite_source_outline_setup()
       \'level':1,
       \'type':'variable'
       \}
+      let parse_namespace=''
       for parse in split(line,'\t')
         if parse_index==0
           let heading_object.word = parse
         elseif parse =~ '^lineno:'
           let heading_object.lnum = str2nr(substitute(parse,'lineno:','',''))
+        elseif parse =~ '^namespace:'
+          let parse_namespace = substitute(parse,'namespace:','','')
+          let g:parse_namespace = parse_namespace
         endif
         let parse_index = parse_index+1
       endfor
+      if parse_namespace == ''
+        let namespace = heading_object.word
+      else
+        let namespace = parse_namespace . '.' . heading_object.word
+      endif
+      let namespace_to_heading_map[namespace] = heading_object.word
       let headings = headings + [heading_object]
     endfor
-    let g:headings = headings
+    let g:namespace_to_heading_map = namespace_to_heading_map
     return headings
   endfunction
 endfunction
@@ -89,5 +101,5 @@ endfunction
 
 
 
-#call dein#config('unite-outline',{'hook_add':function('s:unite_source_outline_setup')})
+call dein#config('unite-outline',{'hook_add':function('s:unite_source_outline_setup')})
 
