@@ -181,7 +181,7 @@ endfunction
 function! s:extract_headings(context)
   let l:path = a:context.buffer.path
   let l:jsctags_output_list = s:execute_jsctags(a:context)
-  let g:jsctags_output_list = l:jsctags_output_list
+  "let g:jsctags_output_list = l:jsctags_output_list
 
 
   let root = s:Tree.new()
