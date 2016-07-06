@@ -60,21 +60,51 @@ function! s:parse_line(line, root, namespace_to_heading_map)
     let append_to = a:root
   else
     let namespace = parse_namespace . '.' . heading_object.word
-    if has_key(a:namespace_to_heading_map, parse_namespace)
-      let append_to = a:namespace_to_heading_map[parse_namespace]
-    else
-      "create parents first
-    endif
+    
+    "if parent node(s) are not created yet (i.e. they are not tagged individually), create them with lnum=(this node).lnum
+    let parent_namespace = parse_namespace
+    let no_node_namespaces=[]
+    while !has_key(a:namespace_to_heading_map, parent_namespace)
+      let split_parent_namespace = substitute(parent_namespace,'\.[^\.]*$','','')
+      let split_child_namespace = substitute(parent_namespace,split_parent_namespace . '\.','','')
+      let no_node_namespaces = [split_child_namespace] + no_node_namespaces
+      let reach_root = parent_namespace==split_parent_namespace
+      if has_key(a:namespace_to_heading_map, split_parent_namespace) || reach_root
+        let create_parent_namespace = split_parent_namespace
+        for create_child_namespace in no_node_namespaces
+          let new_node = s:Tree.new()
+          let new_node.lnum = heading_object.lnum
+          let new_node.word = create_child_namespace
+          "object is definitely a variable
+          let new_node.type = 'variable'
+          if reach_root
+            let create_append_to = a:root
+          else
+            let create_append_to = a:namespace_to_heading_map[create_parent_namespace]
+          endif
+          call s:Tree.append_child(create_append_to, new_node)
+          if reach_root
+            let create_parent_namespace = create_child_namespace
+          else
+            let create_parent_namespace = create_parent_namespace . '.' . create_child_namespace
+          endif
+          "second parent node and beyond won't be on the root
+          let reach_root=0
+          let a:namespace_to_heading_map[create_parent_namespace] = new_node
+        endfor
+      endif
+      let parent_namespace = split_parent_namespace
+    endwhile
+    
+    let append_to = a:namespace_to_heading_map[parse_namespace]
   endif
   let a:namespace_to_heading_map[namespace] = heading_object
-  "let headings = headings + [heading_object]
   call s:Tree.append_child(append_to, heading_object)
 endfunction
 
 function! s:extract_headings(context)
   let l:path = a:context.buffer.path
   let l:jsctags_output = system('jsctags ' . l:path . ' -f')
-
   let l:jsctags_output = substitute(l:jsctags_output,'\n$','','')
   let l:jsctags_output_list = split(l:jsctags_output,'\n')
   "let headings=[]
