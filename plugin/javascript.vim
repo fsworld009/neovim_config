@@ -38,7 +38,20 @@ let g:gutentags_ctags_executable_javascript = 'jsctags'
 
 "unite-outlint rule test
 
-function! s:create_heading_object()
+let s:Tree = unite#sources#outline#import('Tree')
+
+function! s:create_heading_object(parent_heading_object)
+  if !exist(a:parent_heading_object)
+    return s:Tree.new()
+  else
+    let heading_object = {
+    \'word':'',
+    \'level': (a:parent_heading_object.level)+1,
+    \'type':'variable'
+    \}
+    
+    return heading_object
+  endif
   
 endfunction
 
@@ -48,16 +61,14 @@ function! s:extract_headings(context)
 
   let l:jsctags_output = substitute(l:jsctags_output,'\n$','','')
   let l:jsctags_output_list = split(l:jsctags_output,'\n')
-  let headings=[]
+  "let headings=[]
+  
+  let root = s:Tree.new()
   
   let namespace_to_heading_map={}
   for line in l:jsctags_output_list
     let parse_index=0
-    let heading_object = {
-    \'word':'',
-    \'level':1,
-    \'type':'variable'
-    \}
+    let heading_object = s:Tree.new()
     let parse_namespace=''
     for parse in split(line,'\t')
       if parse_index==0
@@ -72,14 +83,22 @@ function! s:extract_headings(context)
     endfor
     if parse_namespace == ''
       let namespace = heading_object.word
+      let append_to = root
     else
       let namespace = parse_namespace . '.' . heading_object.word
+      if has_key(namespace_to_heading_map, parse_namespace)
+        let append_to = namespace_to_heading_map[parse_namespace]
+      else
+        "create parents first
+      endif
     endif
-    let namespace_to_heading_map[namespace] = heading_object.word
-    let headings = headings + [heading_object]
+    let namespace_to_heading_map[namespace] = heading_object
+    "let headings = headings + [heading_object]
+    call s:Tree.append_child(append_to, heading_object)
   endfor
   let g:namespace_to_heading_map = namespace_to_heading_map
-  return headings
+  return root
+  "return headings
 endfunction
 
 
