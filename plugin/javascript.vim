@@ -37,65 +37,58 @@ let g:gutentags_ctags_executable_javascript = 'jsctags'
 
 
 "unite-outlint rule test
+
+function! s:create_heading_object()
+  
+endfunction
+
+function! s:extract_headings(context)
+  let l:path = a:context.buffer.path
+  let l:jsctags_output = system('jsctags ' . l:path . ' -f')
+
+  let l:jsctags_output = substitute(l:jsctags_output,'\n$','','')
+  let l:jsctags_output_list = split(l:jsctags_output,'\n')
+  let headings=[]
+  
+  let namespace_to_heading_map={}
+  for line in l:jsctags_output_list
+    let parse_index=0
+    let heading_object = {
+    \'word':'',
+    \'level':1,
+    \'type':'variable'
+    \}
+    let parse_namespace=''
+    for parse in split(line,'\t')
+      if parse_index==0
+        let heading_object.word = parse
+      elseif parse =~ '^lineno:'
+        let heading_object.lnum = str2nr(substitute(parse,'lineno:','',''))
+      elseif parse =~ '^namespace:'
+        let parse_namespace = substitute(parse,'namespace:','','')
+        let g:parse_namespace = parse_namespace
+      endif
+      let parse_index = parse_index+1
+    endfor
+    if parse_namespace == ''
+      let namespace = heading_object.word
+    else
+      let namespace = parse_namespace . '.' . heading_object.word
+    endif
+    let namespace_to_heading_map[namespace] = heading_object.word
+    let headings = headings + [heading_object]
+  endfor
+  let g:namespace_to_heading_map = namespace_to_heading_map
+  return headings
+endfunction
+
+
 function! s:unite_source_outline_setup()
   let g:test = 1
   let g:unite_source_outline_info = get(g:, 'unite_source_outline_info', {})
-  let g:unite_source_outline_info.javascript = {}
-    "\'heading' : 'heading'
-    "\}
-  function! g:unite_source_outline_info.javascript.create_heading(which, heading_line, matched_line, context)
-  let g:output = {
-  \ 'which':a:which,
-  \ 'heading_line':a:heading_line,
-  \ 'matched_line':a:matched_line,
-  \ 'context':a:context
-  \}
-    return {
-        \ 'word' : "heading2",
-        \ 'level': 1,
-        \ 'type' : 'generic',
-        \ }
-  endfunction
-    
-  function! g:unite_source_outline_info.javascript.extract_headings(context)
-    let l:path = a:context.buffer.path
-    let l:jsctags_output = system('jsctags ' . l:path . ' -f')
-
-    let l:jsctags_output = substitute(l:jsctags_output,'\n$','','')
-    let l:jsctags_output_list = split(l:jsctags_output,'\n')
-    let headings=[]
-    
-    let namespace_to_heading_map={}
-    for line in l:jsctags_output_list
-      let parse_index=0
-      let heading_object = {
-      \'word':'',
-      \'level':1,
-      \'type':'variable'
-      \}
-      let parse_namespace=''
-      for parse in split(line,'\t')
-        if parse_index==0
-          let heading_object.word = parse
-        elseif parse =~ '^lineno:'
-          let heading_object.lnum = str2nr(substitute(parse,'lineno:','',''))
-        elseif parse =~ '^namespace:'
-          let parse_namespace = substitute(parse,'namespace:','','')
-          let g:parse_namespace = parse_namespace
-        endif
-        let parse_index = parse_index+1
-      endfor
-      if parse_namespace == ''
-        let namespace = heading_object.word
-      else
-        let namespace = parse_namespace . '.' . heading_object.word
-      endif
-      let namespace_to_heading_map[namespace] = heading_object.word
-      let headings = headings + [heading_object]
-    endfor
-    let g:namespace_to_heading_map = namespace_to_heading_map
-    return headings
-  endfunction
+  let g:unite_source_outline_info.javascript = {
+    \'extract_headings' : function('s:extract_headings')
+    \}
 endfunction
 
 
