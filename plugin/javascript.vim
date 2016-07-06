@@ -98,8 +98,17 @@ function! s:parse_line(line, root, namespace_to_heading_map)
     
     let append_to = a:namespace_to_heading_map[parse_namespace]
   endif
-  let a:namespace_to_heading_map[namespace] = heading_object
-  call s:Tree.append_child(append_to, heading_object)
+  if has_key(a:namespace_to_heading_map, namespace)
+    "if there is already a heading object for this namespace (i.e. child is seen before this node), merge properties
+    let temp_heading_object = heading_object
+    let heading_object = a:namespace_to_heading_map[namespace]
+    let heading_object.lnum = temp_heading_object.lnum
+    let heading_object.type = temp_heading_object.type
+  else
+    let a:namespace_to_heading_map[namespace] = heading_object
+    call s:Tree.append_child(append_to, heading_object)
+  endif
+
 endfunction
 
 function! s:extract_headings(context)
