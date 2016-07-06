@@ -40,19 +40,35 @@ let g:gutentags_ctags_executable_javascript = 'jsctags'
 
 let s:Tree = unite#sources#outline#import('Tree')
 
-function! s:create_heading_object(parent_heading_object)
-  if !exist(a:parent_heading_object)
-    return s:Tree.new()
+function! s:parse_line(line, root, namespace_to_heading_map)
+  let parse_index=0
+  let heading_object = s:Tree.new()
+  let parse_namespace=''
+  for parse in split(a:line,'\t')
+    if parse_index==0
+      let heading_object.word = parse
+    elseif parse =~ '^lineno:'
+      let heading_object.lnum = str2nr(substitute(parse,'lineno:','',''))
+    elseif parse =~ '^namespace:'
+      let parse_namespace = substitute(parse,'namespace:','','')
+      let g:parse_namespace = parse_namespace
+    endif
+    let parse_index = parse_index+1
+  endfor
+  if parse_namespace == ''
+    let namespace = heading_object.word
+    let append_to = a:root
   else
-    let heading_object = {
-    \'word':'',
-    \'level': (a:parent_heading_object.level)+1,
-    \'type':'variable'
-    \}
-    
-    return heading_object
+    let namespace = parse_namespace . '.' . heading_object.word
+    if has_key(a:namespace_to_heading_map, parse_namespace)
+      let append_to = a:namespace_to_heading_map[parse_namespace]
+    else
+      "create parents first
+    endif
   endif
-  
+  let a:namespace_to_heading_map[namespace] = heading_object
+  "let headings = headings + [heading_object]
+  call s:Tree.append_child(append_to, heading_object)
 endfunction
 
 function! s:extract_headings(context)
@@ -67,34 +83,7 @@ function! s:extract_headings(context)
   
   let namespace_to_heading_map={}
   for line in l:jsctags_output_list
-    let parse_index=0
-    let heading_object = s:Tree.new()
-    let parse_namespace=''
-    for parse in split(line,'\t')
-      if parse_index==0
-        let heading_object.word = parse
-      elseif parse =~ '^lineno:'
-        let heading_object.lnum = str2nr(substitute(parse,'lineno:','',''))
-      elseif parse =~ '^namespace:'
-        let parse_namespace = substitute(parse,'namespace:','','')
-        let g:parse_namespace = parse_namespace
-      endif
-      let parse_index = parse_index+1
-    endfor
-    if parse_namespace == ''
-      let namespace = heading_object.word
-      let append_to = root
-    else
-      let namespace = parse_namespace . '.' . heading_object.word
-      if has_key(namespace_to_heading_map, parse_namespace)
-        let append_to = namespace_to_heading_map[parse_namespace]
-      else
-        "create parents first
-      endif
-    endif
-    let namespace_to_heading_map[namespace] = heading_object
-    "let headings = headings + [heading_object]
-    call s:Tree.append_child(append_to, heading_object)
+    call s:parse_line(line, root, namespace_to_heading_map)
   endfor
   let g:namespace_to_heading_map = namespace_to_heading_map
   return root
