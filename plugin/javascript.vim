@@ -38,12 +38,75 @@ let g:gutentags_ctags_executable_javascript = 'jsctags'
 
 "unite-outlint rule test
 
+
 let s:Tree = unite#sources#outline#import('Tree')
+let s:Util  = unite#sources#outline#import('Util')
+let s:Process = unite#util#get_vital().import('Process')
+
+function! s:execute_jsctags(context) abort
+  " Write the current content of the buffer to a temporary file.
+  let input = join(a:context.lines[1:], "\<NL>")
+  let input = s:Process.iconv(input, &encoding, &termencoding)
+  let temp_file = tempname()
+  if unite#util#is_sudo() ||
+        \ writefile(split(input, "\<NL>"), temp_file) == -1
+    call unite#util#print_message(
+          \ "[unite-outline] Couldn't make a temporary file at " . temp_file)
+    return []
+  endif
+  " NOTE: If the auto-update is enabled, the buffer may have been changed
+  " since the last write. Because the user expects the headings to be
+  " extracted from the buffer which he/she is watching now, we need to process
+  " the buffer's content not its file's content.
+
+  let filetype = a:context.buffer.filetype
+  " Assemble the command-line.
+  "let lang_info = s:Ctags.lang_info[filetype]
+  "let opts  = ' -f - --excmd=number --fields=afiKmsSzt --sort=no --append=no'
+  "let opts .= " --language-force=\"" . lang_info.name . "\" "
+  "let opts .= lang_info.ctags_options
+  let opts = ' -f - '
+
+  let path = s:Util.Path.normalize(temp_file)
+  let path = s:Util.String.shellescape(path)
+
+  let cmdline = 'jsctags.cmd' . opts . path
+  let g:cmdline = cmdline
+
+  " Execute the Ctags.
+  let ctags_out = unite#util#system(cmdline)
+  let status = unite#util#get_last_status()
+  if status != 0
+    call unite#print_message(
+          \ "[unite-outline] ctags failed with status " . status . ".")
+    return []
+  endif
+
+  " Delete the used temporary file.
+  if delete(temp_file) != 0
+    call unite#print_error(
+          \ "unite-outline: Couldn't delete a temporary file: " . temp_file)
+  endif
+
+  let ctags_out = substitute(ctags_out, '\n$','','')
+  let tag_lines = split(ctags_out, "\<NL>")
+  try
+    " Convert tag lines into tag objects.
+    "let tags = map(tag_lines, 's:create_tag(v:val, lang_info)')
+    "call filter(tags, '!empty(v:val)')
+    "return tags
+    return tag_lines
+  catch
+    " The first line of the output often contains a hint of an error.
+    throw tag_lines[0]
+  endtry
+endfunction
 
 function! s:parse_line(line, root, namespace_to_heading_map)
   let parse_index=0
   let heading_object = s:Tree.new()
   let parse_namespace=''
+  let g:parse = split(a:line,'\t')
   for parse in split(a:line,'\t')
     if parse_index==0
       let heading_object.word = parse
@@ -51,7 +114,6 @@ function! s:parse_line(line, root, namespace_to_heading_map)
       let heading_object.lnum = str2nr(substitute(parse,'lineno:','',''))
     elseif parse =~ '^namespace:'
       let parse_namespace = substitute(parse,'namespace:','','')
-      let g:parse_namespace = parse_namespace
     endif
     let parse_index = parse_index+1
   endfor
@@ -98,12 +160,17 @@ function! s:parse_line(line, root, namespace_to_heading_map)
     
     let append_to = a:namespace_to_heading_map[parse_namespace]
   endif
+  
   if has_key(a:namespace_to_heading_map, namespace)
     "if there is already a heading object for this namespace (i.e. child is seen before this node), merge properties
     let temp_heading_object = heading_object
     let heading_object = a:namespace_to_heading_map[namespace]
-    let heading_object.lnum = temp_heading_object.lnum
-    let heading_object.type = temp_heading_object.type
+    if has_key(temp_heading_object, 'lnum')
+        let heading_object.lnum = temp_heading_object.lnum
+    endif
+    if has_key(temp_heading_object, 'type')
+      let heading_object.type = temp_heading_object.type
+    endif
   else
     let a:namespace_to_heading_map[namespace] = heading_object
     call s:Tree.append_child(append_to, heading_object)
@@ -113,25 +180,22 @@ endfunction
 
 function! s:extract_headings(context)
   let l:path = a:context.buffer.path
-  let l:jsctags_output = system('jsctags ' . l:path . ' -f')
-  let l:jsctags_output = substitute(l:jsctags_output,'\n$','','')
-  let l:jsctags_output_list = split(l:jsctags_output,'\n')
-  "let headings=[]
-  
+  let l:jsctags_output_list = s:execute_jsctags(a:context)
+  let g:jsctags_output_list = l:jsctags_output_list
+
+
   let root = s:Tree.new()
   
   let namespace_to_heading_map={}
   for line in l:jsctags_output_list
     call s:parse_line(line, root, namespace_to_heading_map)
   endfor
-  let g:namespace_to_heading_map = namespace_to_heading_map
   return root
   "return headings
 endfunction
 
 
 function! s:unite_source_outline_setup()
-  let g:test = 1
   let g:unite_source_outline_info = get(g:, 'unite_source_outline_info', {})
   let g:unite_source_outline_info.javascript = {
     \'extract_headings' : function('s:extract_headings')
