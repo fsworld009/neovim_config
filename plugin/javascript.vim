@@ -228,45 +228,16 @@ function! s:unite_source_outline_setup()
   let g:unite_source_outline_info.javascript = {
     \'extract_headings' : function('s:extract_headings'),
     \'highlight_rules' : [
-      \{'name': 'function',  'pattern' : '/[^: ]\+\s():/'},
-      \{'name': 'variable',  'pattern' : '/[^: ()]\+\s:/'},
-      \{'name': 'id',        'pattern':'/\s*\(prototype\)$/'},
-      \{'name': 'id',        'pattern':'/\s*constructor$/'},
-      \{'name': 'id',        'pattern':'/\s*__proto__$/'},
-      \{'name': 'type',  'pattern' : '/:\s.\+$/'},
-      \{'name': 'type',  'pattern' : '/: (variable)$/'},
-      \{'name': 'type',  'pattern' : '/: (function)$/'}
+      \{'name': 'function',  'pattern' : '/[^: ]\+\s():/','highlight':'Function'},
+      \{'name': 'variable',  'pattern' : '/[^: ()]\+\s:/','highlight':'Identifier'},
+      \{'name': 'id',        'pattern':'/\s*\(prototype\)$/','highlight':'Special'},
+      \{'name': 'id',        'pattern':'/\s*constructor$/','highlight':'Special'},
+      \{'name': 'id',        'pattern':'/\s*__proto__$/','highlight':'Special'},
+      \{'name': 'type',  'pattern' : '/:\s.\+$/','highlight':'Type'},
+      \{'name': 'type',  'pattern' : '/: (variable)$/','highlight':'Type'},
+      \{'name': 'type',  'pattern' : '/: (function)$/','highlight':'Type'}
     \],
     \}
-    "    
-    
-    "\ 'heading_groups': {
-    "  \   'variable': ['variable'],
-    "  \   'type'     : ['class', 'enum', 'struct', 'typedef'],
-    "  \   'function' : ['function'],
-    "  \ },
-   " \{'name': 'type',  'pattern' : '/:\s.\+$/'},
-  let g:unite_source_outline_highlight = {
-		      \ 'comment' : 'Comment',
-		      \ 'expanded': 'Constant',
-		      \ 'function': 'Function',
-              \ 'variable': 'Identifier',
-		      \ 'id'      : 'Special',
-		      \ 'macro'   : 'Macro',
-		      \ 'method'  : 'Function',
-              \ 'generic' : 'Normal',
-		      \ 'normal'  : 'Normal',
-		      \ 'package' : 'Normal',
-		      \ 'special' : 'Macro',
-		      \ 'type'    : 'Type',
-		      \ 'level_1' : 'Type',
-		      \ 'level_2' : 'PreProc',
-		      \ 'level_3' : 'Identifier',
-		      \ 'level_4' : 'Constant',
-		      \ 'level_5' : 'Special',
-		      \ 'level_6' : 'Normal',
-		      \ 'parameter_list': 'Normal',
-\ }
 endfunction
 
 
