@@ -216,15 +216,13 @@ function! s:unite_source_outline_setup()
   let g:unite_source_outline_info = get(g:, 'unite_source_outline_info', {})
   let g:unite_source_outline_info.javascript = {
     \'extract_headings' : function('s:extract_headings'),
-    \'highlight_rules' : [{
-    \ 'name' : 'variable',
-    \ 'pattern': '/[^\(\)]\+/'
-    \ },{ 'name'     : 'function',
-     \ 'pattern' : '/\S\+\s\(\)/'},
-    \{ 'name'     : 'generic',
-     \ 'pattern' : '/aaa/'},
-     \{'name': 'id','pattern':'/\s*prototype$/'}
-     \]
+    \'highlight_rules' : [
+    \{'name' : 'variable', 'pattern' : '/[^\(\)]\+/'},
+    \{'name': 'function',  'pattern' : '/\S\+\s\(\)/'},
+    \{'name': 'id',        'pattern':'/\s*prototype$/'},
+    \{'name': 'id',        'pattern':'/\s*constructor$/'},
+    \{'name': 'id',        'pattern':'/\s*__proto__$/'}
+    \]
     \}
     
   let g:unite_source_outline_highlight = {
