@@ -102,6 +102,15 @@ function! s:execute_jsctags(context) abort
   endtry
 endfunction
 
+function! s:set_word_by_type(heading_object)
+  if a:heading_object.type == 'function'
+    let a:heading_object.word = a:heading_object.namespace_key . ' ()'
+  else
+    let a:heading_object.word = a:heading_object.namespace_key
+  endif
+endfunction
+
+
 function! s:parse_line(line, root, namespace_to_heading_map)
   let parse_index=0
   let heading_object = s:Tree.new()
@@ -109,19 +118,24 @@ function! s:parse_line(line, root, namespace_to_heading_map)
   let g:parse = split(a:line,'\t')
   for parse in split(a:line,'\t')
     if parse_index==0
-      let heading_object.word = parse
+      let heading_object.namespace_key = parse
     elseif parse =~ '^lineno:'
       let heading_object.lnum = str2nr(substitute(parse,'lineno:','',''))
     elseif parse =~ '^namespace:'
       let parse_namespace = substitute(parse,'namespace:','','')
+    elseif parse == 'v'
+      let heading_object.type = 'variable'
+    elseif parse == 'f'
+      let heading_object.type = 'function'
     endif
     let parse_index = parse_index+1
   endfor
+  
   if parse_namespace == ''
-    let namespace = heading_object.word
+    let namespace = heading_object.namespace_key
     let append_to = a:root
   else
-    let namespace = parse_namespace . '.' . heading_object.word
+    let namespace = parse_namespace . '.' . heading_object.namespace_key
     
     "if parent node(s) are not created yet (i.e. they are not tagged individually), create them with lnum=(this node).lnum
     let parent_namespace = parse_namespace
@@ -137,6 +151,7 @@ function! s:parse_line(line, root, namespace_to_heading_map)
           let new_node = s:Tree.new()
           let new_node.lnum = heading_object.lnum
           let new_node.word = create_child_namespace
+          let new_node.namespace_key = create_child_namespace
           "object is definitely a variable
           let new_node.type = 'variable'
           if reach_root
@@ -157,7 +172,6 @@ function! s:parse_line(line, root, namespace_to_heading_map)
       endif
       let parent_namespace = split_parent_namespace
     endwhile
-    
     let append_to = a:namespace_to_heading_map[parse_namespace]
   endif
   
@@ -171,17 +185,20 @@ function! s:parse_line(line, root, namespace_to_heading_map)
     if has_key(temp_heading_object, 'type')
       let heading_object.type = temp_heading_object.type
     endif
+    call s:set_word_by_type(heading_object)
   else
+    call s:set_word_by_type(heading_object)
     let a:namespace_to_heading_map[namespace] = heading_object
     call s:Tree.append_child(append_to, heading_object)
   endif
+
 
 endfunction
 
 function! s:extract_headings(context)
   let l:path = a:context.buffer.path
   let l:jsctags_output_list = s:execute_jsctags(a:context)
-  "let g:jsctags_output_list = l:jsctags_output_list
+  let g:jsctags_output_list = l:jsctags_output_list
 
 
   let root = s:Tree.new()
@@ -198,8 +215,39 @@ endfunction
 function! s:unite_source_outline_setup()
   let g:unite_source_outline_info = get(g:, 'unite_source_outline_info', {})
   let g:unite_source_outline_info.javascript = {
-    \'extract_headings' : function('s:extract_headings')
+    \'extract_headings' : function('s:extract_headings'),
+    \'highlight_rules' : [{
+    \ 'name' : 'variable',
+    \ 'pattern': '/[^\(\)]\+/'
+    \ },{ 'name'     : 'function',
+     \ 'pattern' : '/\S\+\s\(\)/'},
+    \{ 'name'     : 'generic',
+     \ 'pattern' : '/aaa/'},
+     \{'name': 'id','pattern':'/\s*prototype$/'}
+     \]
     \}
+    
+  let g:unite_source_outline_highlight = {
+		      \ 'comment' : 'Comment',
+		      \ 'expanded': 'Constant',
+		      \ 'function': 'Function',
+              \ 'variable': 'Identifier',
+		      \ 'id'      : 'Special',
+		      \ 'macro'   : 'Macro',
+		      \ 'method'  : 'Function',
+              \ 'generic' : 'Normal',
+		      \ 'normal'  : 'Normal',
+		      \ 'package' : 'Normal',
+		      \ 'special' : 'Macro',
+		      \ 'type'    : 'Type',
+		      \ 'level_1' : 'Type',
+		      \ 'level_2' : 'PreProc',
+		      \ 'level_3' : 'Identifier',
+		      \ 'level_4' : 'Constant',
+		      \ 'level_5' : 'Special',
+		      \ 'level_6' : 'Normal',
+		      \ 'parameter_list': 'Normal',
+\ }
 endfunction
 
 
