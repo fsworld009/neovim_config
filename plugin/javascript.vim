@@ -76,7 +76,7 @@ function! s:execute_jsctags(context) abort
     let bin_name = 'jsctags'
   endif
 
-  let cmdline = 'jsctags.cmd' . opts . path
+  let cmdline = bin_name . opts . path
   "let g:cmdline = cmdline
 
   " Execute the Ctags.
