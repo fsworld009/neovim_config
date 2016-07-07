@@ -69,9 +69,15 @@ function! s:execute_jsctags(context) abort
 
   let path = s:Util.Path.normalize(temp_file)
   let path = s:Util.String.shellescape(path)
+  
+  if has('win32')
+    let bin_name = 'jsctags.cmd'
+  else
+    let bin_name = 'jsctags'
+  endif
 
   let cmdline = 'jsctags.cmd' . opts . path
-  let g:cmdline = cmdline
+  "let g:cmdline = cmdline
 
   " Execute the Ctags.
   let ctags_out = unite#util#system(cmdline)
@@ -162,7 +168,7 @@ function! s:parse_line(line, root, namespace_to_heading_map)
   let parse_index=0
   let heading_object = s:Tree.new()
   let parse_namespace=''
-  let g:parse = split(a:line,'\t')
+  "let g:parse = split(a:line,'\t')
   for parse in split(a:line,'\t')
     if parse_index==0
       let heading_object.namespace_key = parse
@@ -212,7 +218,7 @@ endfunction
 function! s:extract_headings(context)
   let l:path = a:context.buffer.path
   let l:jsctags_output_list = s:execute_jsctags(a:context)
-  let g:jsctags_output_list = l:jsctags_output_list
+  "let g:jsctags_output_list = l:jsctags_output_list
 
 
   let root = s:Tree.new()
