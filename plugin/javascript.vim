@@ -103,10 +103,19 @@ function! s:execute_jsctags(context) abort
 endfunction
 
 function! s:set_word_by_type(heading_object)
-  if a:heading_object.type == 'function'
-    let a:heading_object.word = a:heading_object.namespace_key . ' ()'
-  else
-    let a:heading_object.word = a:heading_object.namespace_key
+  let a:heading_object.word = a:heading_object.namespace_key
+  if a:heading_object.namespace_key != 'prototype' && a:heading_object.namespace_key != '__proto__' && a:heading_object.namespace_key != 'constructor'
+    if a:heading_object.type == 'function'
+      let type_prefix='()'
+    else
+      let type_prefix=''
+    endif
+  
+    if has_key(a:heading_object, 'type_info')
+      let a:heading_object.word .= ' ' . type_prefix . ':: ' . a:heading_object.type_info
+    else
+      let a:heading_object.word .= ' ' . type_prefix . ':: (' . a:heading_object.type . ')'
+    endif
   endif
 endfunction
 
@@ -127,6 +136,8 @@ function! s:parse_line(line, root, namespace_to_heading_map)
       let heading_object.type = 'variable'
     elseif parse == 'f'
       let heading_object.type = 'function'
+    elseif parse =~ '^type:'
+      let heading_object.type_info = substitute(parse,'type:','','')
     endif
     let parse_index = parse_index+1
   endfor
@@ -179,12 +190,12 @@ function! s:parse_line(line, root, namespace_to_heading_map)
     "if there is already a heading object for this namespace (i.e. child is seen before this node), merge properties
     let temp_heading_object = heading_object
     let heading_object = a:namespace_to_heading_map[namespace]
-    if has_key(temp_heading_object, 'lnum')
-        let heading_object.lnum = temp_heading_object.lnum
-    endif
-    if has_key(temp_heading_object, 'type')
-      let heading_object.type = temp_heading_object.type
-    endif
+    let keys=['type','lnum','type_info']
+    for key in keys
+      if has_key(temp_heading_object, key)
+        let heading_object[key] = temp_heading_object[key]
+      endif
+    endfor
     call s:set_word_by_type(heading_object)
   else
     call s:set_word_by_type(heading_object)
@@ -217,14 +228,24 @@ function! s:unite_source_outline_setup()
   let g:unite_source_outline_info.javascript = {
     \'extract_headings' : function('s:extract_headings'),
     \'highlight_rules' : [
-    \{'name' : 'variable', 'pattern' : '/[^\(\)]\+/'},
-    \{'name': 'function',  'pattern' : '/\S\+\s\(\)/'},
-    \{'name': 'id',        'pattern':'/\s*prototype$/'},
-    \{'name': 'id',        'pattern':'/\s*constructor$/'},
-    \{'name': 'id',        'pattern':'/\s*__proto__$/'}
-    \]
+      \{'name': 'function',  'pattern' : '/[^: ]\+\s():/'},
+      \{'name': 'variable',  'pattern' : '/[^: ()]\+\s:/'},
+      \{'name': 'id',        'pattern':'/\s*\(prototype\)$/'},
+      \{'name': 'id',        'pattern':'/\s*constructor$/'},
+      \{'name': 'id',        'pattern':'/\s*__proto__$/'},
+      \{'name': 'type',  'pattern' : '/:\s.\+$/'},
+      \{'name': 'type',  'pattern' : '/: (variable)$/'},
+      \{'name': 'type',  'pattern' : '/: (function)$/'}
+    \],
     \}
+    "    
     
+    "\ 'heading_groups': {
+    "  \   'variable': ['variable'],
+    "  \   'type'     : ['class', 'enum', 'struct', 'typedef'],
+    "  \   'function' : ['function'],
+    "  \ },
+   " \{'name': 'type',  'pattern' : '/:\s.\+$/'},
   let g:unite_source_outline_highlight = {
 		      \ 'comment' : 'Comment',
 		      \ 'expanded': 'Constant',
