@@ -118,5 +118,8 @@ nnoremap ,t :UndotreeToggle<CR>
   nnoremap <leader>g> :diffget 2<CR>
   nnoremap <leader>g< :diffget 3<CR>
   
+"Tern
+  nnoremap <leader>td :TernDef<CR>
+  
 "Autocomplete by Tab
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
