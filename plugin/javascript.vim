@@ -3,7 +3,7 @@ call dein#add('ternjs/tern_for_vim', {
 			\ 'if': 'executable("npm")',
 			\ 'on_ft': 'javascript'
            \ })
-            
+
 call dein#add('othree/yajs.vim', {'on_ft': 'javascript'})
 
 call dein#add('othree/javascript-libraries-syntax.vim', {
@@ -69,7 +69,7 @@ function! s:execute_jsctags(context) abort
 
   let path = s:Util.Path.normalize(temp_file)
   let path = s:Util.String.shellescape(path)
-  
+
   if has('win32')
     let bin_name = 'jsctags.cmd'
   else
@@ -116,7 +116,7 @@ function! s:set_word_by_type(heading_object)
     else
       let type_prefix=''
     endif
-  
+
     if has_key(a:heading_object, 'type_info')
       let a:heading_object.word .= ' ' . type_prefix . ':: ' . a:heading_object.type_info
     else
@@ -125,7 +125,7 @@ function! s:set_word_by_type(heading_object)
   endif
 endfunction
 
-function! s:append_parents(namespace_to_heading_map, parse_namespace, heading_object)
+function! s:append_parents(namespace_to_heading_map, parse_namespace, root, heading_object)
   let parent_namespace = a:parse_namespace
   let no_node_namespaces=[]
   "if parent node(s) are not created yet (i.e. they are not tagged individually), create them with lnum=(this node).lnum
@@ -185,16 +185,16 @@ function! s:parse_line(line, root, namespace_to_heading_map)
     endif
     let parse_index = parse_index+1
   endfor
-  
+
   if parse_namespace == ''
     let namespace = heading_object.namespace_key
     let append_to = a:root
   else
     let namespace = parse_namespace . '.' . heading_object.namespace_key
-    call s:append_parents(a:namespace_to_heading_map, parse_namespace, heading_object)
+    call s:append_parents(a:namespace_to_heading_map, parse_namespace, a:root, heading_object)
     let append_to = a:namespace_to_heading_map[parse_namespace]
   endif
-  
+
   if has_key(a:namespace_to_heading_map, namespace)
     "if there is already a heading object for this namespace (i.e. child is seen before this node), merge properties
     let temp_heading_object = heading_object
@@ -222,7 +222,7 @@ function! s:extract_headings(context)
 
 
   let root = s:Tree.new()
-  
+
   let namespace_to_heading_map={}
   for line in l:jsctags_output_list
     call s:parse_line(line, root, namespace_to_heading_map)
@@ -253,4 +253,3 @@ endfunction
 
 
 call dein#config('unite-outline',{'hook_add':function('s:unite_source_outline_setup')})
-
