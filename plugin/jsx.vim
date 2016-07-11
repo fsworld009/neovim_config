@@ -1,3 +1,7 @@
+call dein#add('pangloss/vim-javascript',{
+  \'on_ft':['jsx']
+  \})
+
 call dein#add('mxw/vim-jsx',{
   \'on_ft':['jsx']
   \})
