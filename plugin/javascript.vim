@@ -111,7 +111,9 @@ endfunction
 function! s:set_word_by_type(heading_object)
   let a:heading_object.word = a:heading_object.namespace_key
   if a:heading_object.namespace_key != 'prototype' && a:heading_object.namespace_key != '__proto__' && a:heading_object.namespace_key != 'constructor'
-    if a:heading_object.type == 'function'
+    if !has_key(a:heading_object, "type")
+      let type_prefix=''
+    elseif a:heading_object.type == 'function'
       let type_prefix='()'
     else
       let type_prefix=''
