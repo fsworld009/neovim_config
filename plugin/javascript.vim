@@ -1,8 +1,13 @@
+function! s:tern_for_vim_setup()
+  let g:tern#command = ["tern"]
+  let g:tern#arguments = ["--persistent"]
+endfunction
+
 call dein#add('ternjs/tern_for_vim', {
 			\ 'build': 'npm install',
 			\ 'if': 'executable("npm")',
 			\ 'on_ft': 'javascript'
-           \ })
+           \ },{'hook_add':function('s:tern_for_vim_setup')})
 
 call dein#add('othree/yajs.vim', {'on_ft': 'javascript'})
 
