@@ -14,7 +14,7 @@ let mapleader = ","                    "change leader key to ','
 syntax on
 set number
 set hlsearch
-"set nowrap                               "no auto word wrapping
+set nowrap                               "no auto word wrapping
 
 "spell check
 set spelllang=en

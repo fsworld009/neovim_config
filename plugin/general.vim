@@ -42,6 +42,7 @@ call dein#add('airblade/vim-rooter')
 call dein#add('majutsushi/tagbar')
 call dein#add('b3niup/numbers.vim')
 "call dein#add('zhaocai/GoldenView.Vim')
+call dein#add('justincampbell/vim-eighties')
 
 call dein#add('scrooloose/nerdcommenter')
 call dein#add('tpope/vim-surround')
