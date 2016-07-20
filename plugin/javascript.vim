@@ -21,7 +21,7 @@ call dein#add('othree/javascript-libraries-syntax.vim', {
 let g:neomake_javascript_enabled_makers = ['eslint']
 if has('win32')
   let g:neomake_javascript_eslint_exe =  'eslint.cmd'
-  let g:gutentags_ctags_executable_javascript = 'jsctags.cmd’
+  let g:gutentags_ctags_executable_javascript = 'jsctags.cmd'
 else
   let g:gutentags_ctags_executable_javascript = 'jsctags'
 endif
