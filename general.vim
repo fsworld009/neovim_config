@@ -36,3 +36,6 @@ set foldlevel=1
 "execute "set undodir="   .  g:vimrc_path . "vimfiles" . g:dir_separator . "undo"   . g:dir_separator
 
 autocmd FileType vim setlocal shiftwidth=2 tabstop=2
+
+"session: save window size and position
+set sessionoptions+=resize,winpos
