@@ -58,6 +58,7 @@ nnoremap <leader>fr :%s///gcI
 nnoremap <leader>di :call dein#install()<CR>
 nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
 nnoremap <leader>dc :call dein#check_lazy_plugins()<CR>
+nnoremap <leader>du :call dein#update()<CR>
 
 "Unite
 nnoremap <leader>uu :Unite -buffer-name=Unite source -start-insert<CR>
@@ -83,10 +84,10 @@ nnoremap <leader>uo :Unite -buffer-name=outline -start-insert outline<cr>
 nnoremap <leader>ef :NERDTreeToggle<CR>
 nnoremap <leader>en :NumbersToggle<CR>
 nnoremap <leader>et :TagbarToggle<CR>
-nnoremap <leader>eg :GoldenViewResize<CR>
+"nnoremap <leader>eg :GoldenViewResize<CR>
 
 "Undo Tree
-nnoremap ,t :UndotreeToggle<CR>
+nnoremap <leader>eu :UndotreeToggle<CR>
 
 "EasyMotion key bindings
   nmap <Plug>(easymotion-prefix)s <Plug>(easymotion-s2)
@@ -121,5 +122,6 @@ nnoremap ,t :UndotreeToggle<CR>
 "Tern
   nnoremap <leader>td :TernDef<CR>
   
-"Autocomplete by Tab
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"Autocomplete movement by Arrows
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<Down>"
+inoremap <expr><tab> pumvisible() ? "\<c-p>" : "\<Up>"
