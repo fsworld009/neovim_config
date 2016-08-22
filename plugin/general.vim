@@ -142,3 +142,8 @@ call dein#add('ludovicchabant/vim-gutentags')
 "let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{','}']]
 
 call dein#add('dkprice/vim-easygrep')
+
+
+" Spelling
+call dein#add('reedes/vim-lexical')
+"let g:lexical#spellfile = [g:vimrc_path . 'dict' . g:dir_separator . 'en.utf-8.add']
