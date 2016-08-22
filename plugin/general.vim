@@ -140,3 +140,5 @@ call dein#add('ludovicchabant/vim-gutentags')
 "   \ "Unknown"   : "?"
 "   \ }
 "let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{','}']]
+
+call dein#add('dkprice/vim-easygrep')
