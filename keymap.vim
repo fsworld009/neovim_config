@@ -123,5 +123,11 @@ nnoremap <leader>eu :UndotreeToggle<CR>
   nnoremap <leader>td :TernDef<CR>
   
 "Autocomplete movement by Arrows
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<Down>"
-inoremap <expr><tab> pumvisible() ? "\<c-p>" : "\<Up>"
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<Tab>"
+inoremap <expr><S-tab> pumvisible() ? "\<c-p>" : "\<C-d>"
+
+
+"Spell/Thesaurus/Dictionary from Normal mode
+let g:lexical#spell_key = '<leader>zs'
+let g:lexical#thesaurus_key = '<leader>zt'
+let g:lexical#dictionary_key = '<leader>zk'
