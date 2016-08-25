@@ -148,4 +148,5 @@ call dein#add('dkprice/vim-easygrep')
 call dein#add('reedes/vim-lexical')
 let g:lexical#spelllang=['en']
 let g:lexical#spellfile = [g:vimrc_path . 'spell\en.utf-8.add']
+autocmd BufNewFile,BufRead * call lexical#init()
 
