@@ -12,6 +12,7 @@ call dein#add('Shougo/dein.vim')
 
 let s:script_files = [
   \ 'general.vim',
+  \ 'cpp.vim',
   \ 'markdown.vim',
   \ 'html.vim',
   \ 'css.vim',
