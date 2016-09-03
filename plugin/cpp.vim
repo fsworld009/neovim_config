@@ -15,16 +15,13 @@ if has('win32')
   "let g:clang_cpp_options = '--target=x86_64-w64-mingw32'
   
 elseif has('mac')
-  let g:deoplete#sources#clang#flags = [
-      \ "-cc1",
-      \ "-triple", "x86_64-apple-macosx10.11.0",
-      \ "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk",
-      .
-      .
-      .
-      \ "-fmax-type-align=16",
-      \ ]
-      
+  "let g:deoplete#sources#clang#flags = [
+  "    \ "-cc1",
+  "    \ "-triple", "x86_64-apple-macosx10.11.0",
+  "    \ "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk",
+  "    \ "-fmax-type-align=16",
+  "    \ ]
+  "    
   "let g:clang_c_options = '-std=gnu11'
   "let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 end
