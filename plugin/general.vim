@@ -150,3 +150,10 @@ let g:lexical#spelllang=['en']
 let g:lexical#spellfile = [g:vimrc_path . 'spell\en.utf-8.add']
 autocmd BufNewFile,BufRead * call lexical#init()
 
+"CamelCaseMotion
+function! s:CamelCaseMotion_setup()
+  call camelcasemotion#CreateMotionMappings('\')
+endfunction
+
+call dein#add('bkad/CamelCaseMotion',{'hook_post_source':function('s:CamelCaseMotion_setup')})
+

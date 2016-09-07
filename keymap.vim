@@ -31,9 +31,9 @@ nnoremap ]L :lopen<CR>
 nnoremap [L :lclose<CR>
 
 " abbreviated motion keys for tags stack moving
-nnoremap ]= <C-]>
-nnoremap [= <C-t>
-vnoremap ]= <C-]>
+nnoremap ]\ <C-]>
+nnoremap [\ <C-t>
+vnoremap ]\ <C-]>
 
 " abbreviated motion keys for jumplist
 nnoremap ]j <C-i>
@@ -70,7 +70,7 @@ nnoremap <leader>ub :Unite -buffer-name=buffer buffer<cr>
 nnoremap <leader>ut :Unite -buffer-name=tab -quick-match tab<cr>
 nnoremap <leader>ur :Unite -buffer-name=register -quick-match register<cr>
 nnoremap <leader>u<leader> :Unite -buffer-name=mapping -start-insert mapping<cr>
-nnoremap <leader>u= :Unite -buffer-name=tags -start-insert tag<cr>
+nnoremap <leader>u\ :Unite -buffer-name=tags -start-insert tag<cr>
 nnoremap <leader>um :Unite -buffer-name=mark -quick-match mark<cr>
 nnoremap <leader>ul :Unite -buffer-name=location -start-insert locationlist<cr>
 nnoremap <leader>uq :Unite -buffer-name=quickfix -start-insert qf<cr>
@@ -131,3 +131,5 @@ inoremap <expr><S-tab> pumvisible() ? "\<c-p>" : "\<C-d>"
 let g:lexical#spell_key = '<leader>zs'
 let g:lexical#thesaurus_key = '<leader>zt'
 let g:lexical#dictionary_key = '<leader>zk'
+
+"CamelCaseMotion
