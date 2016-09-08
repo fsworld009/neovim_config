@@ -24,7 +24,14 @@ call dein#add('Shougo/vimproc.vim')
 "    \    },
 "    \ })
 
-call dein#add('Shougo/unite.vim')
+function! s:unite_setup()
+  let installed = dein#tap('unite.vim')
+  if installed
+    call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'node_modules/')
+  endif
+endfunction
+
+call dein#add('Shougo/unite.vim', {'hook_add': function('s:unite_setup')})
 call dein#add('Shougo/neoyank.vim')
 call dein#add('tsukkee/unite-tag')
 call dein#add('tacroe/unite-mark')
@@ -152,7 +159,10 @@ autocmd BufNewFile,BufRead * call lexical#init()
 
 "CamelCaseMotion
 function! s:CamelCaseMotion_setup()
-  call camelcasemotion#CreateMotionMappings('\')
+  let installed = dein#tap('CamelCaseMotion')
+  if installed
+    call camelcasemotion#CreateMotionMappings('\')
+  endif
 endfunction
 
 call dein#add('bkad/CamelCaseMotion',{'hook_add':function('s:CamelCaseMotion_setup')})

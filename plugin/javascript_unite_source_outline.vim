@@ -1,4 +1,3 @@
-
 "unite-outline rule test
 function! s:execute_jsctags(context) abort
   " Write the current content of the buffer to a temporary file.
@@ -211,4 +210,7 @@ function! s:unite_source_outline_setup()
     \}
 endfunction
 
-call dein#config('unite-outline',{'hook_add':function('s:unite_source_outline_setup')})
+let unite_outline_installed = dein#tap('unite-outline')
+if unite_outline_installed
+  call dein#config('unite-outline',{'hook_add':function('s:unite_source_outline_setup')})
+endif

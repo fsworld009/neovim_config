@@ -40,4 +40,4 @@ endif
 call dein#add('carlitux/deoplete-ternjs')
 
 
-execute "source " . g:vimrc_path . 'plugin' . g:dir_separator . 'javascript_unite_source.vim'
+execute "source " . g:vimrc_path . 'plugin' . g:dir_separator . 'javascript_unite_source_outline.vim'
