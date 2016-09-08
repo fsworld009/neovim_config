@@ -132,4 +132,6 @@ let g:lexical#spell_key = '<leader>zs'
 let g:lexical#thesaurus_key = '<leader>zt'
 let g:lexical#dictionary_key = '<leader>zk'
 
-"CamelCaseMotion
+"Session
+nnoremap <leader>SS :SaveSession<CR>
+nnoremap <leader>SO :OpenSession! default<CR>
