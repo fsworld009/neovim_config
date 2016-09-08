@@ -155,5 +155,5 @@ function! s:CamelCaseMotion_setup()
   call camelcasemotion#CreateMotionMappings('\')
 endfunction
 
-call dein#add('bkad/CamelCaseMotion',{'hook_post_source':function('s:CamelCaseMotion_setup')})
+call dein#add('bkad/CamelCaseMotion',{'hook_add':function('s:CamelCaseMotion_setup')})
 
