@@ -153,7 +153,12 @@ call dein#add('ludovicchabant/vim-gutentags')
 "   \ }
 "let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{','}']]
 
-call dein#add('dkprice/vim-easygrep')
+function! s:vim_easygrep_setup()
+  let g:EasyGrepFilesToExclude = ".svn,.git,node_modules/*.*,tags,*.swp,*~"
+endfunction
+
+
+call dein#add('dkprice/vim-easygrep', {'hook_add':function('s:vim_easygrep_setup')})
 
 
 " Spelling

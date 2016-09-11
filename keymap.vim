@@ -55,10 +55,10 @@ nnoremap <leader>S :set spell!<CR>
 nnoremap <leader>fr :%s///gcI
 
 "dein.vim install and refresh
-nnoremap <leader>di :call dein#install()<CR>
-nnoremap <leader>dr :call dein#recache_runtimepath()<CR>
-nnoremap <leader>dc :call dein#check_lazy_plugins()<CR>
-nnoremap <leader>du :call dein#update()<CR>
+nnoremap <leader>di :call dein#install()
+nnoremap <leader>dr :call dein#recache_runtimepath()
+nnoremap <leader>dc :call dein#check_lazy_plugins()
+nnoremap <leader>du :call dein#update()
 
 "Unite
 nnoremap <leader>uu :Unite -buffer-name=Unite source -start-insert<CR>
