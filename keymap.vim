@@ -138,6 +138,6 @@ nnoremap <leader>SO :OpenSession! default<CR>
 
 "UltiSnips key change (<Tab> is conflicted with autocomplete menu tab s-tab setting)
 let g:UltiSnipsExpandTrigger ="<c-tab>"
-let g:UltiSnipsListSnippets ="aaaa"
+let g:UltiSnipsListSnippets ="<c-y><tab>"
 "let g:UltiSnipsJumpForwardTrigger ="<c-j>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-k>"
