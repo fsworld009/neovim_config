@@ -37,7 +37,7 @@ endif
 "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 "tern
-call dein#add('carlitux/deoplete-ternjs')
+call dein#add('carlitux/deoplete-ternjs', {'hook_add':"let g:deoplete#sources.javascript = g:deoplete#sources._ + ['ternjs']"})
 
 
 execute "source " . g:vimrc_path . 'plugin' . g:dir_separator . 'javascript_unite_source_outline.vim'
