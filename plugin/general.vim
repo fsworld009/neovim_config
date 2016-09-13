@@ -177,5 +177,5 @@ endfunction
 
 call dein#add('bkad/CamelCaseMotion',{'hook_add':function('s:CamelCaseMotion_setup')})
 
-call dein#add('SirVer/ultisnips')
+call dein#add('SirVer/ultisnips',{'hook_add':'set runtimepath+=' . g:vimrc_path . 'UltiSnips' . g:dir_separator})
 call dein#add('honza/vim-snippets')

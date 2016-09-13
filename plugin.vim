@@ -3,6 +3,7 @@ if &compatible
 endif
 
 let s:plugin_base_path = substitute($MYVIMRC, 'nvim' .g:dir_separator . 'init.vim', 'nvim_plugin' . g:dir_separator, '')
+let g:plugin_base_path = s:plugin_base_path
 let s:dein_base_path = s:plugin_base_path . 'repos' . g:dir_separator . 'github.com' . g:dir_separator . 'Shougo' . g:dir_separator . 'dein.vim'
 
 execute "set runtimepath^=" . s:dein_base_path
@@ -18,7 +19,8 @@ let s:script_files = [
   \ 'css.vim',
   \ 'javascript.vim',
   \ 'jsx.vim',
-  \ 'json.vim'
+  \ 'json.vim',
+  \ 'typescript.vim'
   \]
   
 for script_file in s:script_files
