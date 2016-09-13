@@ -40,4 +40,4 @@ autocmd FileType vim setlocal shiftwidth=2 tabstop=2
 "session: save window size and position
 set sessionoptions+=resize,winpos
 
-set noh
+noh
