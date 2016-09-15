@@ -177,5 +177,14 @@ endfunction
 
 call dein#add('bkad/CamelCaseMotion',{'hook_add':function('s:CamelCaseMotion_setup')})
 
-call dein#add('SirVer/ultisnips',{'hook_add':'set runtimepath+=' . g:vimrc_path . 'UltiSnips' . g:dir_separator})
+function! s:Ultisnips_setup()
+  execute "set runtimepath+=" . g:vimrc_path . 'UltiSnips' . g:dir_separator
+  let installed = dein#tap('deoplete.nvim')
+  if installed
+    call deoplete#custom#set('ultisnips', 'min_pattern_length', 1)
+  endif
+endfunction
+
+
+call dein#add('SirVer/ultisnips',{'hook_add':function('s:Ultisnips_setup')})
 call dein#add('honza/vim-snippets')
