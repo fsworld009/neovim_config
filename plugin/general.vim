@@ -179,6 +179,7 @@ call dein#add('bkad/CamelCaseMotion',{'hook_add':function('s:CamelCaseMotion_set
 
 function! s:Ultisnips_setup()
   execute "set runtimepath+=" . g:vimrc_path . 'UltiSnips' . g:dir_separator
+  let g:UltiSnipsUsePythonVersion = 3
   let installed = dein#tap('deoplete.nvim')
   if installed
     call deoplete#custom#set('ultisnips', 'min_pattern_length', 1)
