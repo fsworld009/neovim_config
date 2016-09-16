@@ -12,7 +12,8 @@ call dein#add('ternjs/tern_for_vim', {
 			\ 'on_ft': 'javascript'
            \ },{'hook_add':function('s:tern_for_vim_setup')})
 
-call dein#add('othree/yajs.vim', {'on_ft': 'javascript'})
+call dein#add('othree/yajs.vim')
+"call dein#add('pangloss/vim-javascript')
 
 call dein#add('othree/javascript-libraries-syntax.vim', {
   \'hook_add': "let g:used_javascript_libs = 'lodash,jquery,react'"
