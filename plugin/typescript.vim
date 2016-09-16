@@ -1,3 +1,5 @@
+autocmd FileType typescript setlocal shiftwidth=4 tabstop=4
+
 function! s:yats_setup()
     execute "set runtimepath+=" . g:plugin_base_path . 'repos' . g:dir_separator . 'github.com' . g:dir_separator . 'HerringtonDarkholme' . g:dir_separator . 'yats.vim' . g:dir_separator
 endfunction 
