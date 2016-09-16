@@ -183,6 +183,7 @@ function! s:Ultisnips_setup()
   let installed = dein#tap('deoplete.nvim')
   if installed
     call deoplete#custom#set('ultisnips', 'min_pattern_length', 1)
+    call deoplete#custom#set('ultisnips', 'rank', 9999)
   endif
 endfunction
 
