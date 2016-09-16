@@ -39,7 +39,10 @@ function! s:deoplete_clang_setup()
   endif
 endfunction
 
-call dein#add('zchee/deoplete-clang',{'hook_add':function('s:deoplete_clang_setup')})
+call dein#add('zchee/deoplete-clang',{
+  \'hook_add':function('s:deoplete_clang_setup'),
+  \'on_ft': ['c','cpp']
+  \})
 "call dein#add('justmao945/vim-clang')
 
 "============================old
