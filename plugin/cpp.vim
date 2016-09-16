@@ -25,11 +25,13 @@ function! s:deoplete_clang_setup()
     "call deoplete#custom#set('buffer', 'rank', 9999)
   endif
   if has('win32')
-    let g:deoplete#sources#clang#libclang_path = 'C:\LLVM\bin\libclang.dll'
-    let g:deoplete#sources#clang#clang_header = 'C:\LLVM\lib\clang'
+    let g:deoplete#sources#clang#libclang_path = 'C:\Program Files\LLVM\bin\libclang.dll'
+    let g:deoplete#sources#clang#clang_header = 'C:\Program Files\LLVM\lib\clang'
     let g:deoplete#sources#clang#flags = ['--target=x86_64-w64-mingw32']
     let g:deoplete#sources#clang#sort_algo = 'priority'
     let g:deoplete#sources#clang#std#cpp = 'c++11'
+    
+    "call deoplete#custom#set('clang', 'debug_enabled', 1)
   elseif has('mac')
     let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/3.8.1/lib/libclang.dylib'
     let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/3.8.1/lib/clang'
@@ -39,11 +41,13 @@ function! s:deoplete_clang_setup()
   endif
 endfunction
 
-call dein#add('zchee/deoplete-clang',{
-  \'hook_add':function('s:deoplete_clang_setup'),
-  \'on_ft': ['c','cpp']
-  \})
-"call dein#add('justmao945/vim-clang')
+if has('mac')
+  call dein#add('zchee/deoplete-clang',{
+    \'hook_add':function('s:deoplete_clang_setup'),
+    \'on_ft': ['c','cpp']
+    \})
+  "call dein#add('justmao945/vim-clang')
+endif
 
 "============================old
   "let g:clang_c_options = '--target=x86_64-w64-mingw32'

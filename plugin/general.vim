@@ -134,6 +134,7 @@ function! s:deoplete_setup()
   "  let g:deoplete#omni#input_patterns = {}
   "endif
   " let g:deoplete#disable_auto_complete = 1
+  "call deoplete#enable_logging("INFO", 'path\to\deoplete_log.txt')
 endfunction
 
 call dein#add('Shougo/deoplete.nvim',{'hook_add':function('s:deoplete_setup')})
