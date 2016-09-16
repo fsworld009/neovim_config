@@ -27,7 +27,7 @@ call dein#add('Shougo/vimproc.vim')
 function! s:unite_setup()
   let installed = dein#tap('unite.vim')
   if installed
-    call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'node_modules/')
+    call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'node_modules/\|.DS_Store')
   endif
 endfunction
 
