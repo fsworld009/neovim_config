@@ -9,8 +9,9 @@ endfunction
 call dein#add('ternjs/tern_for_vim', {
 			\ 'build': 'npm install',
 			\ 'if': 'executable("npm")',
-			\ 'on_ft': 'javascript'
-           \ },{'hook_add':function('s:tern_for_vim_setup')})
+			\ 'on_ft': 'javascript',
+      \ 'hook_source':function('s:tern_for_vim_setup')
+      \})
 
 call dein#add('othree/yajs.vim')
 "call dein#add('pangloss/vim-javascript')

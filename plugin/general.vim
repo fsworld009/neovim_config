@@ -3,7 +3,7 @@ if has('win32')
 endif
 
 "call dein#add('fsworld009/obsidian2.vim',{'hook_add':'silent! colorscheme obsidian2'})
-call dein#add('freeo/vim-kalisi',{'hook_add':"set background=dark\nsilent! colorscheme kalisi"})
+"call dein#add('freeo/vim-kalisi',{'hook_add':"set background=dark\nsilent! colorscheme kalisi"})
 call dein#add('mhartington/oceanic-next',{'hook_add':"set background=dark\nsilent! colorscheme OceanicNext"})
 
 call dein#add('tpope/vim-fugitive')
