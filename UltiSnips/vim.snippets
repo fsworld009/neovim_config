@@ -1,0 +1,18 @@
+snippet di "call dein#add" 
+call dein#add('${0:${VISUAL:Plugin Name}}')
+endsnippet
+
+snippet di+ "call dein#add..."
+call dein#add('${1:${VISUAL:Plugin Name}}',\{
+  \\'hook_add': "${2}",
+  \\'on_ft': '${3}',
+  \\\})
+endsnippet
+
+snippet nm "neomake maker"
+let g:neomake_${1:filetype}_makers = ['${2}']
+endsnippet
+
+snippet ds "deoplete source"
+let g:deoplete#sources.${1:filetype} = g:deoplete#sources._ + ['${2}']
+endsnippet
