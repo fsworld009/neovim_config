@@ -21,7 +21,8 @@ let s:script_files = [
   \ 'jsx.vim',
   \ 'json.vim',
   \ 'typescript.vim',
-  \ 'tsx.vim'
+  \ 'tsx.vim',
+  \ 'python.vim'
   \]
   
 for script_file in s:script_files

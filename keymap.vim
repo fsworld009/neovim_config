@@ -3,6 +3,10 @@ nnoremap <C-Left> <C-w><Left>
 nnoremap <C-Right> <C-w><Right>
 nnoremap <C-Up> <C-w><Up>
 nnoremap <C-Down> <C-w><Down>
+nnoremap <C-h> <C-w><Left>
+nnoremap <C-l> <C-w><Right>
+nnoremap <C-k> <C-w><Up>
+nnoremap <C-j> <C-w><Down>
 nnoremap <D-Left> <C-w><Left>
 nnoremap <D-Right> <C-w><Right>
 nnoremap <D-Up> <C-w><Up>
