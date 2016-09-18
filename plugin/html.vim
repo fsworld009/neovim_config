@@ -7,9 +7,11 @@ let g:mta_filetypes = {
     \ 'xhtml' : 1,
     \ 'xml' : 1,
     \ 'jinja' : 1,
-    \ 'javascript.jsx': 1
+    \ 'javascript.jsx': 1,
+    \ 'typescript.tsx': 1
     \}
-
-autocmd FileType html,xhtml,xml setlocal shiftwidth=2 tabstop=2
-autocmd FileType html,xhtml setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup html_augroup
+  autocmd FileType html,xhtml,xml setlocal shiftwidth=2 tabstop=2
+  autocmd FileType html,xhtml setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup end

@@ -18,8 +18,8 @@ elseif has('mac')
 endif
 
 function! s:deoplete_clang_setup()
-  let installed = dein#tap('deoplete.nvim')
-  if installed
+  let l:installed = dein#tap('deoplete.nvim')
+  if l:installed
     let g:deoplete#sources.cpp = g:deoplete#sources._ + ['clang']
     let g:deoplete#sources.c = g:deoplete#sources._ + ['clang']
     "call deoplete#custom#set('buffer', 'rank', 9999)

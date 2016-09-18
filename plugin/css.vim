@@ -7,5 +7,6 @@ let g:neomake_css_enabled_makers = ['stylelint']
 if has('win32')
   let g:neomake_css_stylelint_exe =  'stylelint.cmd'
 endif
-
-autocmd FileType css setlocal iskeyword+=- omnifunc=csscomplete#CompleteCSS
+augroup css_augroup
+  autocmd FileType css setlocal iskeyword+=- omnifunc=csscomplete#CompleteCSS
+augroup end

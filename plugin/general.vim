@@ -25,8 +25,8 @@ call dein#add('Shougo/vimproc.vim')
 "    \ })
 
 function! s:unite_setup()
-  let installed = dein#tap('unite.vim')
-  if installed
+  let l:installed = dein#tap('unite.vim')
+  if l:installed
     call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'node_modules/\|.DS_Store')
   endif
 endfunction
@@ -113,12 +113,12 @@ augroup END
 function! EnterNeomake()
   " don't show the location-list when entering a buffer
   let g:neomake_open_list=0
-  exe "Neomake"
+  exe 'Neomake'
 endfunction
 function! SaveNeomake()
   " show the loc-list after saving
   let g:neomake_open_list=2
-  exe "Neomake"
+  exe 'Neomake'
 endfunction
 
 " https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
@@ -155,7 +155,7 @@ call dein#add('ludovicchabant/vim-gutentags')
 "let g:rainbow#pairs = [['(', ')'], ['[', ']'],['{','}']]
 
 function! s:vim_easygrep_setup()
-  let g:EasyGrepFilesToExclude = ".svn,.git,node_modules/*.*,tags,*.swp,*~"
+  let g:EasyGrepFilesToExclude = '.svn,.git,node_modules/*.*,tags,*.swp,*~'
 endfunction
 
 
@@ -170,8 +170,8 @@ autocmd BufNewFile,BufRead * call lexical#init()
 
 "CamelCaseMotion
 function! s:CamelCaseMotion_setup()
-  let installed = dein#tap('CamelCaseMotion')
-  if installed
+  let l:installed = dein#tap('CamelCaseMotion')
+  if l:installed
     call camelcasemotion#CreateMotionMappings('\')
   endif
 endfunction
@@ -181,13 +181,12 @@ call dein#add('bkad/CamelCaseMotion',{'hook_add':function('s:CamelCaseMotion_set
 function! s:Ultisnips_setup()
   "execute "set runtimepath+=" . g:vimrc_path . 'UltiSnips' . g:dir_separator
   let g:UltiSnipsUsePythonVersion = 3
-  let installed = dein#tap('deoplete.nvim')
-  if installed
+  let l:installed = dein#tap('deoplete.nvim')
+  if l:installed
     call deoplete#custom#set('ultisnips', 'min_pattern_length', 1)
     call deoplete#custom#set('ultisnips', 'rank', 9999)
   endif
 endfunction
-
 
 call dein#add('SirVer/ultisnips',{'hook_add':function('s:Ultisnips_setup')})
 call dein#add('honza/vim-snippets')
