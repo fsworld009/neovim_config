@@ -1,23 +1,27 @@
-snippet di "call dein#add" 
-call dein#add('${0:${VISUAL:Plugin Path}}')
+snippet di "call dein#add" b
+call dein#add('${1:${VISUAL:Plugin Path}}')
 endsnippet
 
-snippet di+ "call dein#add..."
+snippet di+ "call dein#add..." b
 call dein#add('${1:${VISUAL:Plugin Path}}',\{
   \\'hook_add': "${2}",
   \\'on_ft': '${3}',
   \\\})
 endsnippet
 
-snippet nm "neomake maker"
+snippet dc "call dein#config" b
+call dein#config('${1:${VISUAL:Plugin Path}}', {${2}})
+endsnippet
+
+snippet nm "neomake maker" b
 let g:neomake_${1:filetype}_makers = ['${2}']
 endsnippet
 
-snippet ds "deoplete source"
+snippet ds "deoplete source" b
 let g:deoplete#sources.${1:filetype} = g:deoplete#sources._ + ['${2}']
 endsnippet
 
-snippet pi "if plugin installed"
+snippet pi "if plugin installed" b
 let l:installed = dein#tap('${1:${VISUAL:Plugin Name}}')
 if l:installed
   ${2:"actions}

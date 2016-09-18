@@ -20,7 +20,7 @@ endif
 
 
 call dein#add('mhartington/deoplete-typescript', {
-  \'hook_add':"let g:deoplete#sources.typescript = g:deoplete#sources._ + ['typescript']",
+  \'hook_source':"let g:deoplete#sources.typescript = g:deoplete#sources._ + ['typescript']",
   \'on_ft': 'typescript'
   \})
 

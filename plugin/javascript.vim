@@ -40,7 +40,7 @@ endif
 
 "tern
 call dein#add('carlitux/deoplete-ternjs', {
-  \'hook_add':"let g:deoplete#sources.javascript = g:deoplete#sources._ + ['ternjs']",
+  \'hook_source':"let g:deoplete#sources.javascript = g:deoplete#sources._ + ['ternjs']",
   \'on_ft': 'javascript',
   \})
 

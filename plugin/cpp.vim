@@ -43,7 +43,7 @@ endfunction
 
 if has('mac')
   call dein#add('zchee/deoplete-clang',{
-    \'hook_add':function('s:deoplete_clang_setup'),
+    \'hook_source':function('s:deoplete_clang_setup'),
     \'on_ft': ['c','cpp']
     \})
   "call dein#add('justmao945/vim-clang')
