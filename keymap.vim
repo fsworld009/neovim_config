@@ -1,17 +1,8 @@
 " abbreviated motion keys for split moving
-nnoremap <C-Left> <C-w><Left>
-nnoremap <C-Right> <C-w><Right>
-nnoremap <C-Up> <C-w><Up>
-nnoremap <C-Down> <C-w><Down>
-nnoremap <C-h> <C-w><Left>
-nnoremap <C-l> <C-w><Right>
-nnoremap <C-k> <C-w><Up>
-nnoremap <C-j> <C-w><Down>
-nnoremap <D-Left> <C-w><Left>
-nnoremap <D-Right> <C-w><Right>
-nnoremap <D-Up> <C-w><Up>
-nnoremap <D-Down> <C-w><Down>
-
+nnoremap <S-Left> <C-w><Left>
+nnoremap <S-Right> <C-w><Right>
+nnoremap <S-Up> <C-w><Up>
+nnoremap <S-Down> <C-w><Down>
 " abbreviated motion keys for tab moving
 nnoremap ]t gt
 nnoremap [t gT
@@ -141,7 +132,7 @@ nnoremap <leader>SS :SaveSession<CR>
 nnoremap <leader>SO :OpenSession! default<CR>
 
 "UltiSnips key change (<Tab> is conflicted with autocomplete menu tab s-tab setting)
-let g:UltiSnipsExpandTrigger ='<c-tab>'
-let g:UltiSnipsListSnippets ='<c-y><tab>'
+let g:UltiSnipsExpandTrigger ='<C-z>s'
+let g:UltiSnipsListSnippets ='<c-z>S'
 "let g:UltiSnipsJumpForwardTrigger ="<c-j>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-k>"
