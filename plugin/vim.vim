@@ -4,3 +4,6 @@ call dein#add('Shougo/neco-vim',{
   \'on_ft': 'vim',
   \})
 
+augroup vim_augroup
+  autocmd FileType vim setlocal shiftwidth=2 tabstop=2
+augroup end

@@ -10,7 +10,7 @@ let $LANG = 'en_US'
 " General settings
 set backspace=2                        "enable backspace key
 set tabstop=4 shiftwidth=4 expandtab   "insert 4 spaces for a tab, display tab characters as 4 spaces
-let mapleader = ","                    "change leader key to ','
+let g:mapleader = ','                    "change leader key to ','
 syntax on
 set number
 set hlsearch
@@ -35,7 +35,6 @@ set foldlevel=1
 "execute "set directory=" .  g:vimrc_path . "vimfiles" . g:dir_separator . "swap"   . g:dir_separator
 "execute "set undodir="   .  g:vimrc_path . "vimfiles" . g:dir_separator . "undo"   . g:dir_separator
 
-autocmd FileType vim setlocal shiftwidth=2 tabstop=2
 
 "session: save window size and position
 set sessionoptions+=resize,winpos
