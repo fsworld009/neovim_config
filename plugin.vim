@@ -18,11 +18,12 @@ let s:script_files = [
   \ 'json.vim',
   \ 'typescript.vim',
   \ 'tsx.vim',
-  \ 'python.vim'
+  \ 'python.vim',
+  \ 'vim.vim'
   \]
   
 for s:script_file in s:script_files
-  execute 'source ' . g:vimrc_path . 'plugin' . g:dir_separator . s:script_file
+  execute 'source ' . g:vimrc_path . 'plugin_setup' . g:dir_separator . s:script_file
 endfor
 
 
