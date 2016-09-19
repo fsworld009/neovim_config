@@ -4,6 +4,12 @@ let s:dein_base_path = s:plugin_base_path . 'repos' . g:dir_separator . 'github.
 
 execute 'set runtimepath^=' . s:dein_base_path
 
+function! g:Plugin_is_sourced(pluginName)
+  "return 0 when plugins are not installed/cached yet to prevent from init.vim errors
+  "return 0
+  return dein#tap(a:pluginName)
+endfunction
+
 call dein#begin(s:plugin_base_path)
 call dein#add('Shougo/dein.vim')
 

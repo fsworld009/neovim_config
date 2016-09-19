@@ -1,8 +1,8 @@
-snippet di "call dein#add" b
+snippet da "call dein#add" b
 call dein#add('${1:${VISUAL:Plugin Path}}')
 endsnippet
 
-snippet di+ "call dein#add..." b
+snippet da+ "call dein#add..." b
 call dein#add('${1:${VISUAL:Plugin Path}}',\{
   \\'hook_add': "${2}",
   \\'on_ft': '${3}',
@@ -21,8 +21,8 @@ snippet ds "deoplete source" b
 let g:deoplete#sources.${1:filetype} = g:deoplete#sources._ + ['${2}']
 endsnippet
 
-snippet pi "if plugin installed" b
-let l:installed = dein#tap('${1:${VISUAL:Plugin Name}}')
+snippet di "if plugin installed" b
+let l:installed = g:Plugin_is_sourced('${1:${VISUAL:Plugin Name}}')
 if l:installed
   ${2:"actions}
 endif

@@ -18,7 +18,7 @@ elseif has('mac')
 endif
 
 function! s:deoplete_clang_setup()
-  let l:installed = dein#tap('deoplete.nvim')
+  let l:installed = g:Plugin_is_sourced('deoplete.nvim')
   if l:installed
     let g:deoplete#sources.cpp = g:deoplete#sources._ + ['clang']
     let g:deoplete#sources.c = g:deoplete#sources._ + ['clang']

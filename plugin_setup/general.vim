@@ -25,7 +25,7 @@ call dein#add('Shougo/vimproc.vim')
 "    \ })
 
 function! s:unite_setup()
-  let l:installed = dein#tap('unite.vim')
+  let l:installed = g:Plugin_is_sourced('unite.vim')
   if l:installed
     call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', 'node_modules/\|.DS_Store')
   endif
@@ -86,40 +86,43 @@ call dein#add('Lokaltog/vim-easymotion')
 "call dein#add('junegunn/rainbow_parentheses.vim')
 
 function! s:neomake_setup()
-  autocmd! BufWritePost,BufEnter * Neomake
-  let g:neomake_open_list = 0
+  if g:Plugin_is_sourced('neomake')
+    autocmd! BufWritePost,BufEnter * Neomake
+    let g:neomake_open_list = 0
 
-  "let g:neomake_logfile='C:\error.log'
-  let g:neomake_warning_sign = {
-    \ 'text': 'W',
-    \ 'texthl': 'WarningMsg',
-    \ }
+    "let g:neomake_logfile='C:\error.log'
+    let g:neomake_warning_sign = {
+      \ 'text': 'W',
+      \ 'texthl': 'WarningMsg',
+      \ }
 
-  let g:neomake_error_sign = {
-    \ 'text': 'E',
-    \ 'texthl': 'ErrorMsg',
-    \ }
-  "let g:neomake_vim_enabled_makers = ['vimlint']
+    let g:neomake_error_sign = {
+      \ 'text': 'E',
+      \ 'texthl': 'ErrorMsg',
+      \ }
+    "let g:neomake_vim_enabled_makers = ['vimlint']
+    
+    "https://github.com/neomake/neomake/issues/296
+    augroup neomake
+      au! BufEnter * call EnterNeomake()
+      au! BufWritePost * call SaveNeomake()
+    augroup END
+    function! EnterNeomake()
+      " don't show the location-list when entering a buffer
+      let g:neomake_open_list=0
+      exe 'Neomake'
+    endfunction
+    function! SaveNeomake()
+      " show the loc-list after saving
+      let g:neomake_open_list=2
+      exe 'Neomake'
+    endfunction
+  endif
 endfunction
 
 call dein#add('neomake/neomake',{'hook_add':function('s:neomake_setup')})
 call dein#add('syngan/vim-vimlint')
 
-"https://github.com/neomake/neomake/issues/296
-augroup neomake
-  au! BufEnter * call EnterNeomake()
-  au! BufWritePost * call SaveNeomake()
-augroup END
-function! EnterNeomake()
-  " don't show the location-list when entering a buffer
-  let g:neomake_open_list=0
-  exe 'Neomake'
-endfunction
-function! SaveNeomake()
-  " show the loc-list after saving
-  let g:neomake_open_list=2
-  exe 'Neomake'
-endfunction
 
 " https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
 function! s:deoplete_setup()
@@ -170,7 +173,7 @@ autocmd BufNewFile,BufRead * call lexical#init()
 
 "CamelCaseMotion
 function! s:CamelCaseMotion_setup()
-  let l:installed = dein#tap('CamelCaseMotion')
+  let l:installed = g:Plugin_is_sourced('CamelCaseMotion')
   if l:installed
     call camelcasemotion#CreateMotionMappings('\')
   endif
@@ -181,10 +184,11 @@ call dein#add('bkad/CamelCaseMotion',{'hook_add':function('s:CamelCaseMotion_set
 function! s:Ultisnips_setup()
   "execute "set runtimepath+=" . g:vimrc_path . 'UltiSnips' . g:dir_separator
   let g:UltiSnipsUsePythonVersion = 3
-  let l:installed = dein#tap('deoplete.nvim')
+  let l:installed = g:Plugin_is_sourced('deoplete.nvim')
   if l:installed
     call deoplete#custom#set('ultisnips', 'min_pattern_length', 1)
     call deoplete#custom#set('ultisnips', 'rank', 9999)
+    execute 'set runtimepath+=' . g:vimrc_path
   endif
 endfunction
 

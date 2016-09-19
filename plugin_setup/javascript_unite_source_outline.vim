@@ -210,7 +210,6 @@ function! s:unite_source_outline_setup()
     \}
 endfunction
 
-let unite_outline_installed = dein#tap('unite-outline')
-if unite_outline_installed
+if g:Plugin_is_sourced('unite-outline')
   call dein#config('unite-outline',{'hook_add':function('s:unite_source_outline_setup')})
 endif
