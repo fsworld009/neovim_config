@@ -87,7 +87,6 @@ call dein#add('Lokaltog/vim-easymotion')
 
 function! s:neomake_setup()
   if g:Plugin_is_sourced('neomake')
-    autocmd! BufWritePost,BufEnter * Neomake
     let g:neomake_open_list = 0
 
     "let g:neomake_logfile='C:\error.log'
@@ -103,20 +102,22 @@ function! s:neomake_setup()
     "let g:neomake_vim_enabled_makers = ['vimlint']
     
     "https://github.com/neomake/neomake/issues/296
-    augroup neomake
-      au! BufEnter * call EnterNeomake()
-      au! BufWritePost * call SaveNeomake()
-    augroup END
     function! EnterNeomake()
       " don't show the location-list when entering a buffer
       let g:neomake_open_list=0
       exe 'Neomake'
     endfunction
+
     function! SaveNeomake()
       " show the loc-list after saving
       let g:neomake_open_list=2
       exe 'Neomake'
     endfunction
+    
+    augroup neomake_auto_invoke
+      au! BufEnter * call EnterNeomake()
+      au! BufWritePost * call SaveNeomake()
+    augroup END
   endif
 endfunction
 
