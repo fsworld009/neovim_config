@@ -11,6 +11,14 @@ call dein#add('HerringtonDarkholme/yats.vim',{
   \})
 
 
+"https://github.com/neomake/neomake/issues/
+"https://github.com/neomake/neomake/issues/288
+let g:neomake_typescript_tsc_maker = {
+\ 'args': [
+\ '-p', 'tsconfig.json', '--noEmit'
+\ ],
+\ 'append_file': 0
+\ }
 let g:neomake_typescript_enabled_makers = ['tsc']
 
 
