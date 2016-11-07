@@ -1,5 +1,5 @@
 "fallback when colorscheme is not available
-highlight Normal guibg=black guifg=white
+"highlight Normal guibg=black guifg=white
 
 "force English
 set langmenu=en_US

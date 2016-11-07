@@ -2,9 +2,19 @@ if has('win32')
   call dein#add('equalsraf/neovim-gui-shim')
 endif
 
+function! s:vim_quantum_setup()
+  if has("termguicolors")
+    set termguicolors
+  endif
+  set background=dark
+  colorscheme quantum
+endfunction
+
+
 "call dein#add('fsworld009/obsidian2.vim',{'hook_add':'silent! colorscheme obsidian2'})
 "call dein#add('freeo/vim-kalisi',{'hook_add':"set background=dark\nsilent! colorscheme kalisi"})
-call dein#add('mhartington/oceanic-next',{'hook_add':"set background=dark\nsilent! colorscheme OceanicNext"})
+"call dein#add('mhartington/oceanic-next',{'hook_add':"set background=dark\nsilent! colorscheme OceanicNext"})
+call dein#add('tyrannicaltoucan/vim-quantum', {'hook_source': function('s:vim_quantum_setup')})
 
 call dein#add('tpope/vim-fugitive')
 call dein#add('gregsexton/gitv')
@@ -72,8 +82,10 @@ call dein#add('xolox/vim-session', {'hook_add': function('s:vim_session_setup')}
 function! s:vim_airline_setup()
   "let g:airline_theme = 'powerlineish'
   "let g:airline_theme='kalisi'
-  let g:airline_theme='oceanicnext'
-  let g:airline#extensions#branch#enabled=1
+  "let g:airline_theme='oceanicnext'
+  if g:Plugin_is_sourced('vim-quantum')
+   let g:airline#extensions#branch#enabled=1
+  endif
   let g:airline#extensions#tabline#enabled = 1
   set laststatus=2
 endfunction
