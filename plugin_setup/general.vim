@@ -6,6 +6,7 @@ function! s:vim_quantum_setup()
   if has("termguicolors")
     set termguicolors
   endif
+  let g:quantum_black = 1
   set background=dark
   colorscheme quantum
 endfunction

@@ -1,5 +1,5 @@
 call dein#add('mattn/emmet-vim',{'on_ft':['html','xml','xhtml','jsx']})
-call dein#add('othree/html5.vim')
+"call dein#add('othree/html5.vim')
 
 function! s:MatchTagAlways_setup()
   let g:mta_filetypes = {
