@@ -16,9 +16,9 @@ call dein#add('ternjs/tern_for_vim', {
 call dein#add('othree/yajs.vim')
 "call dein#add('pangloss/vim-javascript')
 
-call dein#add('othree/javascript-libraries-syntax.vim', {
-  \'hook_add': "let g:used_javascript_libs = 'lodash,jquery,react'"
-  \})
+"call dein#add('othree/javascript-libraries-syntax.vim', {
+"  \'hook_add': "let g:used_javascript_libs = 'lodash,jquery,react'"
+"  \})
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 if has('win32')

@@ -1,5 +1,21 @@
-call dein#add('mattn/emmet-vim',{'on_ft':['html','xml','xhtml','jsx']})
-"call dein#add('othree/html5.vim')
+function! s:emmet_setup()
+  let g:user_emmet_leader_key='<C-Z>'
+  let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+  \      'extends' : 'jsx',
+  \  },
+  \  'typescript.tsx' : {
+  \      'extends' : 'tsx',
+  \  }
+  \}
+endfunction
+
+
+call dein#add('mattn/emmet-vim',{
+  \'hook_source': function('s:emmet_setup'),
+  \'on_ft':['html','xml','xhtml','jsx','tsx']
+  \})
+call dein#add('othree/html5.vim')
 
 function! s:MatchTagAlways_setup()
   let g:mta_filetypes = {
