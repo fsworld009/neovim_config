@@ -1,6 +1,12 @@
 function! s:tern_for_vim_setup()
+  let g:tern_request_timeout = 1
   let g:tern#command = ['tern']
   let g:tern#arguments = ['--persistent']
+  let g:tern#filetypes = [
+  \ 'javascript',
+  \ 'javascript.jsx',
+  \ 'vue',
+  \ ]
   "let g:tern_show_argument_hints = 'on_hold'
   "let g:tern_show_signature_in_pum = 1
   "autocmd FileType javascript setlocal omnifunc=tern#Complete
@@ -38,7 +44,6 @@ endif
 
 "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-"tern
 call dein#add('carlitux/deoplete-ternjs', {
   \'hook_source':"let g:deoplete#sources.javascript = g:deoplete#sources._ + ['ternjs']",
   \'on_ft': 'javascript',
